@@ -1,0 +1,40 @@
+body
+  font-family: $primary-font
+  font-size: $font-size
+  background-color: $primary-bg
+  color: $primary-text
+  &.no-scroll
+    overflow: hidden
+    position:fixed
+    width: 100%
+
+a
+  color: $gray-dark
+  outline:none
+  text-decoration: none
+  &:hover
+    text-decoration: none
+    color: $gray-light
+  &:focus
+    color: $dark
+    text-decoration: none
+
+hr
+  margin: 10px 0px
+  border-top: 1px solid $borders
+
+canvas
+  width: 100% !important
+
+small
+  color: $gray-mid
+
+[ng-click],
+[data-ng-click],
+[x-ng-click],[ui-sref]
+  cursor: pointer
+
+
+p
+  font-size: 16px
+  line-height: 1.428571429

@@ -7,10 +7,23 @@
     .search-form
       .form-group
         label From
-        input.form-control placeholder="Address, Station Etc." ng-model="query.from" required=""
+        input.form-control#origin(
+          placeholder="Address, Station Etc."
+          ng-model="query.origin"
+          required=""
+          ng-enter="search()"
+          )
+
+
       .form-group.floating-label
         label To
-        input.form-control placeholder="Address, Station Etc."  ng-model="query.to" required=""
+        input.form-control#destination(
+          placeholder="Address, Station Etc."
+          ng-model="query.destination"
+          required=""
+          ng-enter="search()"
+          )
+
       .form-group.floating-label
         label Date/Time
         .row

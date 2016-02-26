@@ -1,6 +1,7 @@
 @DATE_FORMAT = "MMM DD, YYYY"
 @TIMESTAMP_FORMAT = "MMM DD, YYYY hh:mm:ss"
 @DEFAULT_PER_PAGE = 10
+@GMAP_API_KEY = "AIzaSyDl3IaifrpvXFz5UCeE4rqwhWdII-tycsk"
 
 @MONTHS = [
   {key: "1", value: "January"},
