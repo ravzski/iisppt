@@ -1,0 +1,49 @@
+=buttons($color, $bg-color)
+  color: $color
+  background-color: $bg-color
+  border: 0px
+
+  &:hover, &:focus, &:active
+    color: $white
+    background-color: mix(black, $bg-color, 15%)
+    cursor: pointer
+
+  &.no-hover
+    &:hover, &:focus, &:active
+      color: $color
+      background-color: $grey
+
+=disbled
+  cursor: not-allowed
+  pointer-events: none
+  opacity: 0.65
+  filter: alpha(opacity=65)
+  -webkit-box-shadow: none
+  box-shadow: none
+
+.btn
+  border: 0px
+  border-radius: 2px
+  padding: 7px 15px
+  font-size: 12px
+  font-weight: 200
+  line-height: 1.42857143
+  text-align: center
+  white-space: nowrap
+  vertical-align: middle
+  font-weight: 200
+  -ms-touch-action: manipulation
+  touch-action: manipulation
+  cursor: pointer
+  -webkit-user-select: none
+  &.disabled
+    +disbled
+    background-color: $grey
+  &.btn-block
+    width: 100%
+  &.btn-md
+    padding: 10px 40px
+
+.btn-export
+  +buttons($white, $das-blue)
+  border-radius: 4px

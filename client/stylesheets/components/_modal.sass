@@ -1,0 +1,70 @@
+
+.modal
+  &:before
+    content: ""
+    display: block
+    background: rgba(0,0,0,.6)
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 9999
+  &.opaque:before
+    background: rgba(0,0,0,.9)
+
+.btn-close
+  position: absolute
+  right: 13px
+  top: 11px
+
+
+.modal-dialog
+  background: $white
+  border: none
+  border-radius: 3px
+  position: fixed
+  left: 50%
+  top: 7%
+  z-index: 99999
+  width: 640px
+  margin-left: -300px
+  &.pushed-top
+    top: 5%
+
+.modal-body
+  padding: 15px
+  max-height: 450px
+  overflow: auto
+
+.modal-header
+  padding: 15px
+  background-color: $white
+  border-bottom: $border solid 1px
+  border-top-left-radius: 3px
+  border-top-right-radius: 3px
+  h4
+    margin: 0px
+    font-weight: 600
+    font-size: 14px
+    color: $dark
+
+.modal-footer
+  border-top: $border solid 1px
+  text-align: right
+  padding: 10px 15px
+  background-color: $white
+  border-bottom-left-radius: 3px
+  border-bottom-right-radius: 3px
+
+.modal
+  .inline
+    display: inline-block
+  .width40
+    width: 40%
+  .width60
+    width: 60%
+  .width50
+    width: 50%
+  .width10
+    width: 10%

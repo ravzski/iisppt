@@ -1,0 +1,119 @@
+/**
+ * angular-growl-v2 - v0.7.3 - 2015-01-05
+ * http://janstevens.github.io/angular-growl-2
+ * Copyright (c) 2015 Marco Rinck,Jan Stevens; Licensed MIT
+ */
+/*
+ *  growl-container styles
+ */
+/* line 10, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed {
+  position: fixed;
+  float: right;
+  width: 90%;
+  max-width: 350px;
+  z-index: 9999;
+}
+
+/* line 17, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.top-right {
+  top: 10px;
+  right: 15px;
+}
+
+/* line 21, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.bottom-right {
+  bottom: 10px;
+  right: 15px;
+}
+
+/* line 25, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.top-left {
+  top: 10px;
+  left: 15px;
+}
+
+/* line 29, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.bottom-left {
+  bottom: 10px;
+  left: 15px;
+}
+
+/* line 33, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.top-center {
+  top: 10px;
+  left: 50%;
+  margin-left: -150px;
+}
+
+/* line 38, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container.growl-fixed.bottom-center {
+  bottom: 10px;
+  left: 50%;
+  margin-left: -150px;
+}
+
+/*
+ * growl-item styles
+ */
+/* line 47, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > .growl-item {
+  padding: 10px;
+  padding-right: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* line 54, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > button {
+  border: none;
+  outline: none;
+}
+
+/* line 59, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > .growl-item.ng-enter,
+.growl-container > .growl-item.ng-leave {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+}
+
+/* line 67, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > .growl-item.ng-enter,
+.growl-container > .growl-item.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+/* line 71, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > .growl-item.ng-leave,
+.growl-container > .growl-item.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+/* line 75, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-container > div.growl-item {
+  background-position: 12px center;
+  background-repeat: no-repeat;
+}
+
+/*
+ * growl-title styles
+ */
+/* line 83, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-title {
+  font-size: 16px;
+}
+
+/* line 86, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-item.icon > .growl-title {
+  margin: 0 0 0 40px;
+}
+
+/*
+ * growl-message styles
+ */
+/* line 93, /Users/rav/.rvm/gems/ruby-2.2.0-preview1/gems/rails-assets-angular-growl-2-0.7.3/app/assets/stylesheets/angular-growl-2/angular-growl.scss */
+.growl-item.icon > .growl-message {
+  margin: 0 0 0 40px;
+}

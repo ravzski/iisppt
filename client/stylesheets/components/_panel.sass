@@ -1,0 +1,52 @@
+.panel
+  border: none
+  box-shadow: none
+  border-radius: 0px
+  position: relative
+  margin-bottom: 20px
+  background-color: $white
+  &.sticky
+    position: fixed
+    top: 60px
+    width: 29%
+  .panel-heading
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    border-bottom: 1px solid $border
+    padding: 15px
+    text-transform: uppercase
+    color: #232425
+    font-size: 13px
+    letter-spacing: 1px
+    font-weight: 600
+    .action-group
+      float: right
+      .icon-down,.icon-up
+        font-size: 18px
+        margin-right: 5px
+      .icon-plus
+        font-size: 16px
+      &.left
+        float: left
+  .panel-body
+    padding: 10px 15px
+    &.condensed
+      padding: 0px 10px
+
+  .panel-action
+    position: absolute
+    top: 15px
+    right: 10px
+    a
+      font-size: 20px
+    .tooltip
+      top: -63px
+      left: -35px
+      p
+        text-transform: none
+
+
+.summary-text
+  text-align: center
+  .total
+    font-size: 18px

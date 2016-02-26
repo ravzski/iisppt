@@ -1,0 +1,36 @@
+.tooltip
+  background: rgba(0,0,0,.8)
+  border-radius: 2px
+  box-sizing: border-box
+  opacity: 0
+  padding: 5px 10px
+  position: absolute
+  transition: all 0.15s linear
+  left: -20px
+  width: 83px
+  p
+    padding: 0px
+    margin: 0px
+    color: $white
+    font-size: 11px
+    text-align: center
+  &::after
+    border-left: 6px solid transparent
+    border-right: 6px solid transparent
+    border-top: 6px solid rgba(0,0,0,.8)
+    content: ""
+    height: 0
+    margin-left: -6px
+    position: absolute
+    bottom: -6px
+    left: 50%
+    width: 0
+  &.show
+    top: -43px
+    opacity: 1
+.hover-trigger
+  position: relative
+
+// .hover-trigger:hover .tooltip
+//   top: 0px
+//   opacity: 1
