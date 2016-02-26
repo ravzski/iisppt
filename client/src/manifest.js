@@ -1,6 +1,11 @@
 //= require_tree ./properties
 //= require nprogress/nprogress
 
+//= require jquery/jquery.min.js
+//= require moment/moment
+//= require pikaday/pikaday
+//= require jquery-backstretch/jquery.backstretch.min
+
 //= require angular/angular
 //= require angular-growl-v2/build/angular-growl.min
 //= require angular-ui-select/dist/select.min
@@ -12,8 +17,7 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require angular-rails-templates
 
-//= require moment/moment
-//= require pikaday/pikaday
+
 
 //= require init
 //= require_tree ./config
