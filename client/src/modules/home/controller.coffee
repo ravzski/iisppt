@@ -1,6 +1,7 @@
-Ctrl = ($scope,$state,Gmap,$http)->
+Ctrl = ($scope,$state,Gmap,$http,$timeout)->
 
   $scope.expanded = false
+  $scope.showOptions = false
 
   $scope.query =
     origin: ""
@@ -16,6 +17,12 @@ Ctrl = ($scope,$state,Gmap,$http)->
 
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
+    if !$scope.showOptions
+      $timeout (->
+        $scope.showOptions = !$scope.showOptions
+      ), 300
+    else
+      $scope.showOptions = !$scope.showOptions
 
   $scope.search = ->
     $scope.query =
@@ -25,5 +32,5 @@ Ctrl = ($scope,$state,Gmap,$http)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$timeout']
 angular.module('client').controller('HomeCtrl', Ctrl)
