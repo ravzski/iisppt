@@ -1,6 +1,6 @@
 Ctrl = ($scope,$state,Gmap,$http)->
 
-  $scope.expanded = true
+  $scope.expanded = false
 
   $scope.query =
     origin: ""
@@ -14,11 +14,6 @@ Ctrl = ($scope,$state,Gmap,$http)->
     car: true
     walk: true
 
-  initAutocomplete = ->
-    new (google.maps.places.Autocomplete)(document.getElementById('origin'), types: [ 'geocode' ])
-    new (google.maps.places.Autocomplete)(document.getElementById('destination'), types: [ 'geocode' ])
-    new (google.maps.places.Autocomplete)(document.getElementById('via'), types: [ 'geocode' ])
-
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
 
@@ -29,9 +24,6 @@ Ctrl = ($scope,$state,Gmap,$http)->
 
     $state.go("site.result", $scope.query)
 
-
-
-  #initAutocomplete()
 
 Ctrl.$inject = ['$scope','$state','Gmap','$http']
 angular.module('client').controller('HomeCtrl', Ctrl)
