@@ -14,6 +14,7 @@ angular.module(
     'SiteHeader',
     'Backstretch',
     'Timepicker',
-    'SearchComponents'
+    'SearchComponents',
+    'GmapAutocomplete'
   ]
 )
