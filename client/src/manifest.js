@@ -5,6 +5,7 @@
 //= require moment/moment
 //= require pikaday/pikaday
 //= require jquery-backstretch/jquery.backstretch.min
+//= require jt.timepicker/jquery.timepicker
 
 //= require angular/angular
 //= require angular-growl-v2/build/angular-growl.min

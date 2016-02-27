@@ -16,14 +16,10 @@ Ctrl = ($scope,$state,Gmap,$http)->
     $scope.query =
       origin: $('#origin').val()
       destination: $('#destination').val()
-      
+
     $state.go("site.result", $scope.query)
 
-  # move this to a directive some other time
-  $('.bg-slideshow').backstretch [
-    '/images/slide2.jpg'
-    '/images/slide3.jpg'
-  ],{duration: 3000, fade: 750}
+
 
   initAutocomplete()
 

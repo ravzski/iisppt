@@ -11,6 +11,8 @@ angular.module(
     'DatePicker',
     'NgActive',
     'Tooltip',
-    'SiteHeader'
+    'SiteHeader',
+    'Backstretch',
+    'Timepicker'
   ]
 )
