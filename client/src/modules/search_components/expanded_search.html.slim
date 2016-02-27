@@ -1,0 +1,36 @@
+.search-form.expanded-search
+
+  .form-group
+    label Via
+    input.form-control#origin(
+      placeholder="Address, Station Etc."
+      ng-model="query.via"
+      required=""
+      ng-enter="search()"
+      )
+
+  .form-group
+    label What type of transport would you like to use?
+
+  .checkbox-row
+    input.form-control ng-model="query.car"  type="checkbox"
+    i.icon-car
+
+  .checkbox-row
+    input.form-control ng-model="query.bike"  type="checkbox"
+    i.icon-bike
+
+
+  .checkbox-row
+    input.form-control ng-model="query.train"  type="checkbox"
+    i.icon-train
+
+
+  .checkbox-row
+    input.form-control ng-model="query.train"  type="checkbox"
+    i.icon-walk
+
+  .form-group
+    label Do you need extra time for transferring?
+    input.form-control type="checkbox" ng-model="query.extra_time"
+    span Yes, calculate 5 minutes extra transfer time

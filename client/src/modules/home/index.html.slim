@@ -1,64 +1,11 @@
 .bg-slideshow home-backstretch=""
 
-.panel.search-panel
+.panel.search-panel ng-class="{'expanded': expanded}"
   .panel-heading
     h3 Plan your journey
   .panel-body
-    .search-form
-      .form-group
-        label From
-        input.form-control#origin(
-          placeholder="Address, Station Etc."
-          ng-model="query.origin"
-          required=""
-          ng-enter="search()"
-          )
-
-
-      .form-group.floating-label
-        label To
-        input.form-control#destination(
-          placeholder="Address, Station Etc."
-          ng-model="query.destination"
-          required=""
-          ng-enter="search()"
-          )
-
-      .form-group.floating-label
-        label Date/Time
-        .row
-          .col-md-9
-            input.form-control.date-picker date-picker=""  ng-model="query.date" required=""
-          .col-md-3.time-picker-group
-            input.form-control timepicker="" ng-model="query.time" required="" placeholder="Time"
-
-      .form-gorup
-        .radio-row
-          .radio
-            label
-              input(
-                type="radio"
-                name="departure"
-                required=""
-                ng-model="query.departure"
-                ng-value="true"
-                ng-click="setDestinationType()"
-
-              )
-              | Departure
-
-          .radio
-            label
-              input(
-                type="radio"
-                name="departure"
-                required=""
-                ng-model="query.arrival"
-                ng-click="setDestinationType()"
-
-              )
-              | Arrival
-
-      .submit-group
-        a.btn.btn-primary.btn-block ng-click="search()" Plan my journey
-        a.btn.btn-default.btn-block ng-click="toggleMoreOptions()" More Options
+    div main-search=""
+    div expanded-search="" ng-show="expanded"
+  .submit-group
+    a.btn.btn-primary.btn-block ng-click="search()" Plan my journey
+    a.btn.btn-default.btn-block ng-click="toggleMoreOptions()" More Options

@@ -1,0 +1,31 @@
+.expand.ng-hide
+  height: 0
+  transition: width 0.35s ease
+  overflow: hidden
+  position: relative
+
+.expand
+  height: 141px
+  transition: width 0.35s ease
+  overflow: hidden
+  position: relative
+
+.expand.ng-hide-remove,
+.expand.ng-hide-add
+  display: block !important
+
+.expand.ng-hide-add
+  animation-name: hide
+  -webkit-animation-name: hide
+  animation-duration: .5s
+  -webkit-animation-duration: .5s
+  animation-timing-function: ease-in
+  -webkit-animation-timing-function: ease-in
+
+.expand.ng-hide-remove
+  animation-name: show
+  -webkit-animation-name: show
+  animation-duration: .5s
+  -webkit-animation-duration: .5s
+  animation-timing-function: ease-out
+  -webkit-animation-timing-function: ease-out

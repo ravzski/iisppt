@@ -1,5 +1,7 @@
 Ctrl = ($scope,$state,Gmap,$http)->
 
+  $scope.expanded = true
+
   $scope.query =
     origin: ""
     destination: ""
@@ -7,10 +9,17 @@ Ctrl = ($scope,$state,Gmap,$http)->
     time: ""
     departure: true
     arrival: false
+    bike: true
+    train: true
+    car: true
+    walk: true
 
   initAutocomplete = ->
     new (google.maps.places.Autocomplete)(document.getElementById('origin'), types: [ 'geocode' ])
     new (google.maps.places.Autocomplete)(document.getElementById('destination'), types: [ 'geocode' ])
+
+  $scope.toggleMoreOptions = ->
+    $scope.expanded = !$scope.expanded
 
   $scope.search = ->
     $scope.query =

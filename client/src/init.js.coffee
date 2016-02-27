@@ -13,6 +13,7 @@ angular.module(
     'Tooltip',
     'SiteHeader',
     'Backstretch',
-    'Timepicker'
+    'Timepicker',
+    'SearchComponents'
   ]
 )
