@@ -17,12 +17,10 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
 
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
-    if !$scope.showOptions
-      $timeout (->
-        $scope.showOptions = !$scope.showOptions
-      ), 300
-    else
+    timeout = if !$scope.showOptions then 300 else 0  
+    $timeout (->
       $scope.showOptions = !$scope.showOptions
+    ), timeout
 
   $scope.search = ->
     $scope.query =
