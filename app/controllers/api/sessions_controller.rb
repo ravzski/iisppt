@@ -1,4 +1,4 @@
-class Api::V1::SessionsController < ApiController
+class Api::SessionsController < ApiController
 
   skip_before_action :authenticate_request, only: :create
 

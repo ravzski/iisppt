@@ -1,10 +1,5 @@
 namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{current_path} && touch tmp/restart.txt"
-    end
-  end
+
 
    desc "Install bower"
    task :install_bower do
@@ -23,6 +18,5 @@ namespace :deploy do
 
   before "deploy:migrate", 'deploy:create_db'
   before "deploy:compile_assets", "install_bower"
-  before "deploy:log_revision", "deploy:restart"
 
 end
