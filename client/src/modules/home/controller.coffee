@@ -17,7 +17,7 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
 
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
-    timeout = if !$scope.showOptions then 300 else 0  
+    timeout = if !$scope.showOptions then 300 else 0
     $timeout (->
       $scope.showOptions = !$scope.showOptions
     ), timeout
