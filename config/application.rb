@@ -28,7 +28,7 @@ module Iisppt
     config.middleware.delete "ActionDispatch::Cookies"
     config.middleware.delete "ActionDispatch::Session::CookieStore"
     config.middleware.delete "ActionDispatch::Flash"
-    config.serve_static_assets = true
+
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     config.autoload_paths += Dir[Rails.root.join('app', 'controllers', '{**}')]
 
