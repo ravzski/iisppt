@@ -1,8 +1,8 @@
-Ctrl = ($scope,$state,Gmap,$http,$timeout)->
+Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
 
   $scope.expanded = false
   $scope.showOptions = false
-
+  $rootScope.headerClass = "home-header"
   $scope.query =
     origin: ""
     destination: ""
@@ -32,5 +32,5 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$timeout']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$timeout','$rootScope']
 angular.module('client').controller('HomeCtrl', Ctrl)

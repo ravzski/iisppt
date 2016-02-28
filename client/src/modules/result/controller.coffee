@@ -1,5 +1,6 @@
-Ctrl = ($scope,$state,Gmap,$http)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
 
+  $rootScope.headerClass = ""
   $scope.query =
     origin: $state.params.origin
     destination: $state.params.destination
@@ -18,7 +19,7 @@ Ctrl = ($scope,$state,Gmap,$http)->
         lat: 41.85
         lng: -87.65)
     directionsDisplay.setMap map
-    directionsDisplay.setPanel document.getElementById('right-panel')
+    directionsDisplay.setPanel document.getElementById('direction-panel')
     calculateAndDisplayRoute()
 
 
@@ -42,5 +43,5 @@ Ctrl = ($scope,$state,Gmap,$http)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope']
 angular.module('client').controller('ResultCtrl', Ctrl)
