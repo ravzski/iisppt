@@ -1,5 +1,5 @@
 server '52.77.47.185',
-  user: 'deployer',
+  user: 'deploy',
   roles: %w{web app db}
 
 set :stage, :production

@@ -1,11 +1,10 @@
 require 'net/ssh/proxy/command'
-require 'airbrake/capistrano3'
 
 # config valid only for Capistrano 3.1
 lock '3.4.0'
 
 set :application, 'iisppt'
-set :repo_url, 'git@github.com:iisppt/iisppt.git'
+set :repo_url, 'git@github.com:ravzski/iisppt.git'
 set :deploy_via, :remote_cache
 set :bundle_without, [:development, :test]
 

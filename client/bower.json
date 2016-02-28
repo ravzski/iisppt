@@ -25,7 +25,8 @@
     "angular-aria": "~1.4.4",
     "angular-sanitize": "~1.4.4",
     "angular-ui-select": "~0.12.1",
-    "angular-growl-v2": "~0.7.5"
+    "angular-growl-v2": "~0.7.5",
+    "jquery": "^2.2.1"
   },
   "resolutions": {
     "angular": "1.4.4"

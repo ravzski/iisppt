@@ -13,12 +13,6 @@ namespace :deploy do
      end
    end
 
-  desc "Clean old assets"
-  task :clean_assets do
-    on roles(:all) do
-      execute "cd #{current_path} && rm -rf public/assets/*"
-    end
-  end
 
   desc "Create DB"
   task :create_db do
@@ -28,7 +22,6 @@ namespace :deploy do
   end
 
   before "deploy:migrate", 'deploy:create_db'
-  before "deploy:compile_assets", 'deploy:clean_assets'
   before "deploy:compile_assets", "install_bower"
   before "deploy:log_revision", "deploy:restart"
 
