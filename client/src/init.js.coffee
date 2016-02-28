@@ -3,7 +3,6 @@ angular.module(
   [
     'ngSanitize',
     'ui.router',
-    'ui.select',
     'templates',
     'ngResource',
     'ngAnimate',

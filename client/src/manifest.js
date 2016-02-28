@@ -8,10 +8,8 @@
 //= require jt.timepicker/jquery.timepicker
 
 //= require angular/angular
-//= require angular-growl-v2/build/angular-growl.min
-//= require angular-ui-select/dist/select.min
 //= require angular-sanitize/angular-sanitize.min
-//= require angular-animate/angular-animate.min
+//= require angular-animate/angular-animate
 //= require angular-messages/angular-messages.min
 //= require angular-aria/angular-aria.min
 //= require angular-resource/angular-resource
