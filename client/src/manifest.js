@@ -1,7 +1,7 @@
 //= require_tree ./properties
 //= require nprogress/nprogress
 
-//= require jquery/jquery.min.js
+//= require jquery/dist/jquery.min.js
 //= require moment/moment
 //= require pikaday/pikaday
 //= require jquery-backstretch/jquery.backstretch.min
