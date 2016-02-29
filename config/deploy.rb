@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:ravzski/iisppt.git'
 set :deploy_to, '/home/deploy/'
 set :format, :pretty
 set :log_level, :debug
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/gmap.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle config/thin}
 set :assets_roles, [:app]
 set :rvm_ruby_version, '2.3.0@iisppt'
