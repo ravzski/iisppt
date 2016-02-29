@@ -5,6 +5,6 @@ class ApiController < ActionController::Base
   include CommonResponse
 
   protect_from_forgery with: :null_session
-  before_action :authenticate_request
+  #before_action :authenticate_request
 
 end

@@ -26,30 +26,3 @@
         input.form-control.date-picker date-picker=""  ng-model="query.date" required=""
       .col-md-3.time-picker-group
         input.form-control timepicker="" ng-model="query.time" required="" placeholder="Time"
-
-  .form-gorup
-    .radio-row
-      .radio
-        label
-          input(
-            type="radio"
-            name="departure"
-            required=""
-            ng-model="query.departure"
-            ng-value="true"
-            ng-click="setDestinationType()"
-
-          )
-          | Departure
-
-      .radio
-        label
-          input(
-            type="radio"
-            name="departure"
-            required=""
-            ng-model="query.arrival"
-            ng-click="setDestinationType()"
-
-          )
-          | Arrival

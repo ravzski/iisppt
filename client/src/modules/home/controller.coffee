@@ -30,5 +30,6 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
     $state.go("site.result", $scope.query)
 
 
+
 Ctrl.$inject = ['$scope','$state','Gmap','$http','$timeout','$rootScope']
 angular.module('client').controller('HomeCtrl', Ctrl)

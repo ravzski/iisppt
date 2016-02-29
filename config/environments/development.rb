@@ -1,3 +1,6 @@
+gmap_config = Rails.application.config_for(:gmap)
+GMAP_API =  gmap_config["api_key"]
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

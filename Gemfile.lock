@@ -105,7 +105,12 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    google_maps_service (0.4.1)
+      hurley (~> 0.1)
+      multi_json (~> 1.11)
+      retriable (~> 2.0)
     hike (1.2.3)
+    hurley (0.2)
     i18n (0.7.0)
     json (1.8.3)
     kaminari (0.16.3)
@@ -171,6 +176,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     redis (3.2.2)
+    retriable (2.1.0)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -265,6 +271,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fuubar
+  google_maps_service
   kaminari
   letter_opener
   multi_json

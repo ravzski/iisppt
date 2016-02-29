@@ -16,6 +16,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'angular-rails-templates','0.1.3'
 gem 'factory_girl_rails'
 gem 'faker'
+gem 'google_maps_service'
 
 group :production do
   gem 'rails_12factor'

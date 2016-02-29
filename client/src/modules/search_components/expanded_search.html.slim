@@ -1,27 +1,10 @@
 .search-form.expanded-search
 
-  .form-group.floating-label
-    label Via
-    input.form-control#via(
-      placeholder="Address, Station Etc."
-      ng-model="query.via"
-      required=""
-      ng-enter="search()"
-      gmap-autocomplete=""
-      )
-
   .transport-group
     label What type of transport would you like to use?
 
   .row
     .col-md-12
-      .checkbox-row
-        input.form-control ng-model="query.car"  type="checkbox"
-        i.icon-car
-
-      .checkbox-row
-        input.form-control ng-model="query.bike"  type="checkbox"
-        i.icon-bike
 
 
       .checkbox-row
@@ -32,10 +15,3 @@
       .checkbox-row
         input.form-control ng-model="query.train"  type="checkbox"
         i.icon-walk
-
-  .extra-time-group
-    label Do you need extra time for transferring?
-
-    .checkbox-row
-      input.form-control type="checkbox" ng-model="query.extra_time"
-      span Yes, calculate 5 minutes extra transfer time

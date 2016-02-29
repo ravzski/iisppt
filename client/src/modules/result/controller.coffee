@@ -2,12 +2,10 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
 
   $rootScope.headerClass = ""
   $scope.query =
-    origin: $state.params.origin
-    destination: $state.params.destination
-    date: moment().format(DATE_FORMAT)
-    time: ""
-    departure: true
-    arrival: false
+    from: $state.params.origin
+    to: $state.params.destination
+    departure_time: $state.params.departure_time
+    bus: $state.params.bus || true
 
   directionsDisplay = new (google.maps.DirectionsRenderer)
   directionsService = new (google.maps.DirectionsService)
@@ -22,13 +20,16 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
     directionsDisplay.setPanel document.getElementById('direction-panel')
     calculateAndDisplayRoute()
 
+    $http.get("/api/search",{params: $scope.query}).
+      success (data)->
 
   calculateAndDisplayRoute = ->
 
     directionsService.route {
-      origin: $scope.query.origin
-      destination: $scope.query.destination
-      travelMode: google.maps.TravelMode.DRIVING
+      origin: $scope.query.from
+      destination: $scope.query.to
+      travelMode: google.maps.TravelMode.TRANSIT
+      provideRouteAlternatives: true
     }, (response, status) ->
 
       if status == google.maps.DirectionsStatus.OK
