@@ -4,7 +4,7 @@ angular.module('client').config [
 
     $stateProvider
       .state 'site.result',
-        url: 'result?destination&origin&departure_time&bus',
+        url: 'result?from&to&departure_time&bus&rail&time',
         controller: 'ResultCtrl',
         templateUrl: 'modules/result/index.html'
 

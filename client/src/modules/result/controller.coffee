@@ -2,11 +2,12 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
 
   $rootScope.headerClass = ""
   $scope.query =
-    from: $state.params.origin
-    to: $state.params.destination
+    from: $state.params.from
+    to: $state.params.to
     departure_time: $state.params.departure_time || moment().format(DATE_FORMAT)
     time: moment(new Date()).format("hh:mma")
-    bus: $state.params.bus || true
+    bus: if $state.params.bus == "true" then true else false
+    rail: if $state.params.rail == "true" then true else false
 
   directionsDisplay = new (google.maps.DirectionsRenderer)
   directionsService = new (google.maps.DirectionsService)
@@ -32,13 +33,19 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
       travelMode: google.maps.TravelMode.TRANSIT
       provideRouteAlternatives: true
       transitOptions:
-        modes: ["BUS", "RAIL"]
+        modes: getModes()
     }, (response, status) ->
       if status == google.maps.DirectionsStatus.OK
         directionsDisplay.setDirections response
       else
         window.alert 'Directions request failed due to ' + status
 
+
+  getModes = ->
+    modes = []
+    modes.push "BUS" if $scope.query.bus
+    modes.push "RAIL" if $scope.query.rail
+    modes
 
   initMap()
 

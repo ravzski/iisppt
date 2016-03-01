@@ -24,6 +24,7 @@
   i
     font-size: 12px
 
+
 #map
   margin-right: 400px
 
@@ -67,6 +68,27 @@
       top: 20px
       position: relative
 
+.rating-container
+  margin: 20px 5px
+  ul
+    list-style: none
+    padding: 0px
+    margin: 0px
+    li
+      display: inline-block
+      a
+        font-size: 45px
+        margin-right: 24px
+      &:last-child a
+        margin-right: 0px
+
+  h5
+    border-bottom: 1px solid $border !Important
+    display: block
+    padding-bottom: 8px
+    font-size: 12px
+    font-weight: bold
+
 .adp-warnbox
   display: none
 
@@ -81,9 +103,19 @@
   background-color: $white
   top: 50px
   padding: 10px
-  
+  overflow-y: auto
+  height: 100%
+  padding-bottom: 70px
+
 img.adp-marker
   margin: 10px
+
+.adp-substep span
+  background-color: $white !important
+
+.adp-listheader
+  font-weight: bold
+  color: $primary-text
 
 .direction-container .search-form
   float: none

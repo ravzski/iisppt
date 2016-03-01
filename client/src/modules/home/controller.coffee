@@ -10,10 +10,8 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
     time: moment(new Date()).format("hh:mma")
     departure: true
     arrival: false
-    bike: true
-    train: true
-    car: true
-    walk: true
+    bus: true
+    rail: true
 
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
@@ -23,9 +21,8 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
     ), timeout
 
   $scope.search = ->
-    $scope.query =
-      origin: $('#origin').val()
-      destination: $('#destination').val()
+    $scope.query.from = $('#origin').val()
+    $scope.query.to = $('#destination').val()
 
     $state.go("site.result", $scope.query)
 

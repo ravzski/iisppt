@@ -9,3 +9,9 @@ module.directive 'expandedSearch', ->
   restrict: 'A'
   replace: true
   templateUrl: 'modules/search_components/expanded_search.html'
+
+
+module.directive 'expandedSearchResult', ->
+  restrict: 'A'
+  replace: true
+  templateUrl: 'modules/search_components/expanded_search_result.html'
