@@ -7,7 +7,8 @@ module Gmap
          "Ortigas Center, Pasig, NCR, Philippines",
         mode: 'transit',
         transit_mode: get_transit_mode,
-        alternatives: false)
+        alternatives: true,
+        )
     end
 
     private

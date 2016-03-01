@@ -6,8 +6,8 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
   $scope.query =
     origin: ""
     destination: ""
-    date: moment().format(DATE_FORMAT)
-    time: ""
+    departure_time: moment().format(DATE_FORMAT)
+    time: moment(new Date()).format("hh:mma")
     departure: true
     arrival: false
     bike: true

@@ -3,7 +3,7 @@
     label From
     input.form-control#origin(
       placeholder="Address, Station Etc."
-      ng-model="query.origin"
+      ng-model="query.from"
       required=""
       gmap-autocomplete=""
       )
@@ -13,7 +13,7 @@
     label To
     input.form-control#destination(
       placeholder="Address, Station Etc."
-      ng-model="query.destination"
+      ng-model="query.to"
       required=""
       ng-enter="search()"
       gmap-autocomplete=""
@@ -23,6 +23,6 @@
     label Date/Time
     .row
       .col-md-9
-        input.form-control.date-picker date-picker=""  ng-model="query.date" required=""
+        input.form-control.date-picker date-picker=""  ng-model="query.departure_time" required=""
       .col-md-3.time-picker-group
         input.form-control timepicker="" ng-model="query.time" required="" placeholder="Time"

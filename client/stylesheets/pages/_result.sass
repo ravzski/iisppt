@@ -1,10 +1,9 @@
 
 #map
   position: absolute
-  width: 78%
+  width: 55%
   height: 100%
-  left: 387px
-
+  left: 800px
 
 #result-container
   position: fixed
@@ -12,15 +11,19 @@
   overflow: hidden
   height: 100%
   top: 51px
-  border-right: 4px solid $gray-mid
+  border-right: 2px solid $gray-mid
 
-#direction-panel
+.direction-container
   line-height: 30px
   padding-left: 10px
   background-color: $white
   padding: 10px 15px
+  overflow-y: auto
+  height: 100%
+  padding-bottom: 80px
   i
     font-size: 12px
+
 #map
   margin-right: 400px
 
@@ -63,6 +66,27 @@
       font-size: 29px
       top: 20px
       position: relative
+
+.adp-warnbox
+  display: none
+
+.adp-agencies
+  display: none
+
+.adp
+  position: fixed
+  left: 396px
+  z-index: 9999
+  width: 400px
+  background-color: $white
+  top: 50px
+  padding: 10px
+  
+img.adp-marker
+  margin: 10px
+
+.direction-container .search-form
+  float: none
 
 @media print
   #map
