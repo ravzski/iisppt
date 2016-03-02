@@ -1,6 +1,8 @@
 Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
 
   $rootScope.headerClass = ""
+  $scope.uiState =
+    noRoute: false
   $scope.query =
     from: $state.params.from
     to: $state.params.to
@@ -20,13 +22,13 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
         lng: -87.65)
     directionsDisplay.setMap map
     directionsDisplay.setPanel document.getElementById('direction-panel')
-    calculateAndDisplayRoute()
+    $scope.calculateAndDisplayRoute()
 
     # $http.get("/api/search",{params: $scope.query}).
     #   success (data)->
 
-  calculateAndDisplayRoute = ->
-    time = moment(new Date("2016-03-05 12:45 am")).subtract(moment.duration("00:05:20"))
+  $scope.calculateAndDisplayRoute = ->
+    time = moment(new Date("2016-03-05 5:45 am")).toDate().getTime()
     directionsService.route {
       origin: $scope.query.from
       destination: $scope.query.to
@@ -34,12 +36,12 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
       provideRouteAlternatives: true
       transitOptions:
         modes: getModes()
-        departureTime: new Date(time)
     }, (response, status) ->
       if status == google.maps.DirectionsStatus.OK
         directionsDisplay.setDirections response
       else
-        window.alert 'Directions request failed due to ' + status
+        $scope.uiState.noRoute = true
+        $scope.$apply()
 
 
   getModes = ->
@@ -51,6 +53,8 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
   initMap()
 
   $scope.search = ->
+    $scope.query.from = $('#origin').val()
+    $scope.query.to = $('#destination').val()
     $state.go("site.result", $scope.query)
 
 

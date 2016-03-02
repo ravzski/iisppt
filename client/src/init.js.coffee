@@ -14,6 +14,7 @@ angular.module(
     'Backstretch',
     'Timepicker',
     'SearchComponents',
-    'GmapAutocomplete'
+    'GmapAutocomplete',
+    'Login'
   ]
 )

@@ -7,8 +7,8 @@
     .submit-group
       a.btn.btn-primary.btn-block ng-click="search()" Plan my journey
 
-    #direction-panel
-    .rating-container
+    #direction-panel ng-show="!uiState.noRoute"
+    .rating-container ng-show="!uiState.noRoute"
       h5 Rating
       ul
         li
@@ -21,4 +21,7 @@
           a.icon-star
         li
           a.icon-star
-#map
+
+#map ng-show="!uiState.noRoute"
+.no-route-container ng-show="uiState.noRoute"
+  h5 No Routes Available

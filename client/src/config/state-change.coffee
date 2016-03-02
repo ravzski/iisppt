@@ -7,6 +7,9 @@ angular.module('client').run [
     $rootScope.polling = false
 
 
+    $rootScope.togleLogin = ->
+      $rootScope.loginModal = !$rootScope.loginModal
+
     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 
 

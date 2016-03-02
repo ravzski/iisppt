@@ -69,16 +69,21 @@
       position: relative
 
 .rating-container
-  margin: 20px 5px
+  position: fixed
+  top: 51px
+  left: 405px
+  z-index: 9999
+  width: 395px
+  border-right: 1px solid $gray-mid
   ul
     list-style: none
-    padding: 0px
+    padding: 10px 0px
     margin: 0px
     li
       display: inline-block
       a
         font-size: 45px
-        margin-right: 24px
+        margin-right: 35px
       &:last-child a
         margin-right: 0px
 
@@ -88,41 +93,13 @@
     padding-bottom: 8px
     font-size: 12px
     font-weight: bold
+    padding-top: 8px
+    width: 97%
 
-.adp-warnbox
-  display: none
-
-.adp-agencies
-  display: none
-
-.adp
+.no-route-container
   position: fixed
-  left: 396px
-  z-index: 9999
-  width: 405px
-  background-color: $white
-  top: 50px
-  padding: 10px
-  overflow-y: auto
-  height: 100%
-  padding-bottom: 70px
-  border-right: 2px solid $gray-mid
-
-img.adp-marker
-  margin: 10px
-
-.adp-substep span
-  background-color: $white !important
-
-.adp-listheader
-  font-weight: bold
-  color: $primary-text
-
-.direction-container .search-form
-  float: none
-
-.adp-legal
-  display: none
+  left: 50%
+  top: 400px
 
 @media print
   #map
