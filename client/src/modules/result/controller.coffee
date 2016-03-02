@@ -34,6 +34,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
       provideRouteAlternatives: true
       transitOptions:
         modes: getModes()
+        departureTime: new Date(time)
     }, (response, status) ->
       if status == google.maps.DirectionsStatus.OK
         directionsDisplay.setDirections response
