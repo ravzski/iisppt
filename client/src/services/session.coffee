@@ -2,6 +2,11 @@ module = ($resource)->
 
   Session = $resource "/api/session", null,
     {
+
+      register:
+        url: "/api/register"
+        method: 'POST'
+
       login:
         method: 'POST'
 

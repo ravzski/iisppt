@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
-    resource :session, only: %i(show create destroy)
+    resource :session, only: %i(show create destroy) do
+      collection do
+        post :register
+      end
+    end
     resources :users
 
     get "/search", to: 'search#index'

@@ -13,14 +13,17 @@ class Api::SessionsController < ApiController
   def create
     user = User.find_by_credentials(params[:credentials])
     if user && user.set_access_token
-      user.update_attributes timezone: params[:timezone]
       render json:
         {
-          auth_token: user.access_token
+          auth_token: user.access_token,
+          user_id: user.id
         }
     else
       render json: { error: 'Incorrect email or password' }, status: :unauthorized
     end
+  end
+
+  def register
   end
 
   def destroy

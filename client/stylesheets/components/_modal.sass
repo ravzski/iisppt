@@ -1,9 +1,27 @@
 
+.modal-dialog.auth-modal
+  width: 350px
+  margin-left: -175px
+  .modal-header
+    background-color: $primary
+    text-align: center
+    h4
+      color: $white
+      font-weight: 200
+    .btn-close
+      color: $white
+
+  .modal-footer
+    .left-label
+      float: left
+      position: relative
+      top: 8px
+
 .modal
   &:before
     content: ""
     display: block
-    background: rgba(0,0,0,.6)
+    background: rgba(0,0,0,.75)
     position: fixed
     top: 0
     left: 0
@@ -26,18 +44,15 @@
   border-radius: 3px
   position: fixed
   left: 50%
-  top: 7%
+  top: 25%
   z-index: 99999
-  width: 640px
-  margin-left: -300px
+  width: 500px
+  margin-left: -250px
   &.pushed-top
     top: 5%
-  &.auth-modal
-    width: 500px
-    left: 55%
-    
+
 .modal-body
-  padding: 15px
+  padding: 25px 25px 15px 25px
   max-height: 450px
   overflow: auto
 
@@ -49,15 +64,14 @@
   border-top-right-radius: 3px
   h4
     margin: 0px
-    font-weight: 600
-    font-size: 14px
+    font-size: 16px
     color: $primary-text
 
 .modal-footer
   border-top: $border solid 1px
   text-align: right
   padding: 10px 15px
-  background-color: $white
+  background-color: #EFEFEF
   border-bottom-left-radius: 3px
   border-bottom-right-radius: 3px
 

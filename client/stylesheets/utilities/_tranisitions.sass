@@ -1,0 +1,20 @@
+=transition($args)
+  -webkit-transition: $args
+  -moz-transition: $args
+  -ms-transition: $args
+  -o-transition: $args
+  transition: $args
+
+=sidebar-transition($sec)
+  -webkit-animation-duration: $sec
+  -moz-animation-duration: $sec
+  -o-animation-duration: $sec
+  animation-duration: $sec
+  -webkit-animation-fill-mode: both
+  -moz-animation-fill-mode: both
+  -o-animation-fill-mode: both
+  animation-fill-mode: both
+
+=ease($sec)
+  -webkit-transition: all $sec ease-in-out
+  transition: all $sec ease-in-out

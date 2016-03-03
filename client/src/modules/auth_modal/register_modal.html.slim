@@ -1,0 +1,47 @@
+.modal-dialog.auth-modal
+  .modal-header
+    a.btn-close ng-click="toggleRegister()" ×
+    h4 Sign up for an account
+
+  .modal-body
+    form name="form"
+      .form-group
+        label Email
+        input.form-control(
+          type="email"
+          name="email"
+          ng-model="user.email"
+          required=""
+          ng-enter="submit(form)"
+          placeholder="Email"
+          ng-class="{error: form.name.$error.required && form.$submitted}")
+
+      .form-group
+        label Password
+        input.form-control(
+          type="password"
+          name="password"
+          ng-model="user.password"
+          required=""
+          ng-enter="submit(form)"
+          placeholder="Password"
+          ng-class="{error: form.code.$error.required && form.$submitted}")
+
+      .form-group
+        label Confirm Password
+        input.form-control(
+          type="password"
+          name="password"
+          ng-model="user.confirm_password"
+          required=""
+          ng-enter="register(form)"
+          placeholder="Password"
+          ng-class="{error: form.code.$error.required && form.$submitted}")
+
+
+  .modal-footer
+    .row
+      .col-md-8
+        a.left-label ng-click="toggleModal('login')" Already a Member?
+      .col-md-4
+        a.btn.btn-primary.btn-block ng-click="register(form)" ng-class="{'disable': disabledSubmit}" Sign Up
