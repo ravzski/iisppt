@@ -1,5 +1,15 @@
 .search-form.expanded-search
 
+  .form-group
+    label Via
+    input.form-control#via(
+      placeholder="Address, Station Etc."
+      ng-model="query.via"
+      required=""
+      gmap-autocomplete=""
+      )
+
+
   .transport-group
     label What type of transport would you like to use?
 

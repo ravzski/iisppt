@@ -11,7 +11,7 @@ angular.module('client').factory('httpInterceptor', [
           when 401
             $.growl.error {message: message}
             $rootScope.clearSession()
-            $injector.get('$state').go("login")
+            $injector.get('$state').go("sites.home")
           when 500,422
             $.growl.error {message: message}
         $q.reject(response)

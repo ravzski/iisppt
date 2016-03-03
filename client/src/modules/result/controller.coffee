@@ -3,6 +3,8 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
   $rootScope.headerClass = ""
   $scope.uiState =
     noRoute: false
+    showRating: false
+
   $scope.query =
     from: $state.params.from
     to: $state.params.to
@@ -28,6 +30,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
     #   success (data)->
 
   $scope.calculateAndDisplayRoute = ->
+    $scope.uiState.showRating = false
     time = moment(new Date("2016-03-05 5:45 am")).toDate().getTime()
     directionsService.route {
       origin: $scope.query.from
@@ -38,6 +41,8 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
         modes: getModes()
     }, (response, status) ->
       if status == google.maps.DirectionsStatus.OK
+        $scope.uiState.showRating = true
+        $scope.$apply()
         directionsDisplay.setDirections response
       else
         $scope.uiState.noRoute = true

@@ -13,11 +13,7 @@ class Api::SessionsController < ApiController
   def create
     user = User.find_by_credentials(params[:credentials])
     if user && user.set_access_token
-      render json:
-        {
-          auth_token: user.access_token,
-          user_id: user.id
-        }
+      render json: Sessions::Builder.new(user).create
     else
       render json: { error: 'Incorrect email or password' }, status: :unauthorized
     end

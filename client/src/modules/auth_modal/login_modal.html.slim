@@ -5,7 +5,7 @@
     h4 Login in to you account
 
   .modal-body
-    form name="form"
+    form name="loginForm"
       .form-group
         label Email
         input.form-control(
@@ -13,9 +13,9 @@
           name="email"
           ng-model="credentials.email"
           required=""
-          ng-enter="submit(form)"
+          ng-enter="login(loginForm)"
           placeholder="Email"
-          ng-class="{error: form.email.$error.required && form.$submitted}")
+          ng-class="{error: loginForm.email.$error.required && loginForm.$submitted}")
 
       .form-group
         label Password
@@ -24,9 +24,9 @@
           name="password"
           ng-model="credentials.password"
           required=""
-          ng-enter="login(form)"
+          ng-enter="login(loginForm)"
           placeholder="Password"
-          ng-class="{error: form.password.$error.required && form.$submitted}")
+          ng-class="{error: loginForm.password.$error.required && loginForm.$submitted}")
 
 
   .modal-footer
@@ -34,4 +34,4 @@
       .col-md-8
         a.left-label ng-click="toggleModal('register')" Not a Member yet?
       .col-md-4
-        a.btn.btn-primary.btn-block ng-click="login(form)" ng-class="{'disable': disabledSubmit}" Login
+        a.btn.btn-primary.btn-block ng-click="login(loginForm)" ng-class="{'disable': disabledSubmit}" Login

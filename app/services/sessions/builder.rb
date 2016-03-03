@@ -10,6 +10,16 @@ module Sessions
     # note: only put fields that are neccessary for session request
     #
     def show
+      common_details
+    end
+
+    def create
+      common_details.merge({auth_token: @current_user.access_token})
+    end
+
+    private
+
+    def common_details
       {
         id: @current_user.id,
         first_name: @current_user.first_name,

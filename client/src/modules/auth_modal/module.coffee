@@ -31,10 +31,11 @@ Ctrl = ($scope,$state,$http,$rootScope,Session,User)->
     Session.login(credentials: $scope.credentials).$promise
       .then (data) ->
         localStorage.setItem("AuthToken", data.auth_token)
-        localStorage.setItem("UserId", data.user_id)
+        localStorage.setItem("UserId", data.id)
         $scope.registerModal = false
-        $rooScope.user = data
+        $rootScope.currentUser = data
         $.growl.notice {message: MESSAGES.LOGIN_SUCCESS}
+        $scope.loginModal = false
       .finally ->
         $scope.disabledSubmit = false
 
@@ -60,9 +61,9 @@ Ctrl = ($scope,$state,$http,$rootScope,Session,User)->
     User.save(user: $scope.user).$promise
       .then (data) ->
         localStorage.setItem("AuthToken", data.auth_token)
-        localStorage.setItem("UserId", data.user_id)
+        localStorage.setItem("UserId", data.id)
         $.growl.notice {message: MESSAGES.LOGIN_SUCCESS}
-        $rooScope.user = data
+        $rootScope.currentUser = data
         $scope.registerModal = false
       .finally ->
         $scope.disabledSubmit = false
