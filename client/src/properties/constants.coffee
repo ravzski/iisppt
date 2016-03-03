@@ -34,6 +34,8 @@
   LOGOUT_SUCCESS: "Logout success"
   NO_DATA: "No more data to get"
   NEW_NOTIFICATION: "New Notification"
+  PASSWORD_NOT_MATCH: "Password did not match"
+  INVALID_EMAIL: "Invalid Email"
 
 @DELETE_WARNING = {
     title: 'Are you sure?'

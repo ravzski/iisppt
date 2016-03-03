@@ -23,8 +23,6 @@ class Api::SessionsController < ApiController
     end
   end
 
-  def register
-  end
 
   def destroy
     if current_user.destroy_token

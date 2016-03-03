@@ -1,10 +1,34 @@
-.modal-dialog.auth-modal
+.modal-dialog.auth-modal.reg-modal
   .modal-header
     a.btn-close ng-click="toggleRegister()" ×
     h4 Sign up for an account
 
   .modal-body
     form name="form"
+
+      .form-group
+        label First Name
+        input.form-control(
+          type="text"
+          name="first_name"
+          ng-model="user.first_name"
+          required=""
+          ng-enter="submit(form)"
+          placeholder="First Name"
+          ng-class="{error: form.first_name.$error.required && form.$submitted}")
+
+      .form-group
+        label Last Name
+        input.form-control(
+          type="text"
+          name="last_name"
+          ng-model="user.last_name"
+          required=""
+          ng-enter="submit(form)"
+          placeholder="Last Name"
+          ng-class="{error: form.last_name.$error.required && form.$submitted}")
+
+
       .form-group
         label Email
         input.form-control(
@@ -14,7 +38,7 @@
           required=""
           ng-enter="submit(form)"
           placeholder="Email"
-          ng-class="{error: form.name.$error.required && form.$submitted}")
+          ng-class="{error: (form.email.$error.required && form.$submitted) || emailErr}")
 
       .form-group
         label Password
@@ -25,18 +49,18 @@
           required=""
           ng-enter="submit(form)"
           placeholder="Password"
-          ng-class="{error: form.code.$error.required && form.$submitted}")
+          ng-class="{error: (form.password.$error.required && form.$submitted) || passwordErr}")
 
       .form-group
         label Confirm Password
         input.form-control(
           type="password"
-          name="password"
+          name="confirm_password"
           ng-model="user.confirm_password"
           required=""
           ng-enter="register(form)"
           placeholder="Password"
-          ng-class="{error: form.code.$error.required && form.$submitted}")
+          ng-class="{error: (form.confirm_password.$error.required && form.$submitted) || passwordErr}")
 
 
   .modal-footer

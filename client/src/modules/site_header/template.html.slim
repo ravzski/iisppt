@@ -8,7 +8,11 @@
       a href="#" About
     li
       a href="#" Contact
-    li.pull-right
+      
+    li.pull-right ng-if="!user"
       a href="#" ng-click="toggleModal('login')" Login
-    li.pull-right
+    li.pull-right ng-if="!user"
       a href="#" ng-click="toggleModal('register')"  Register
+
+    li.pull-right ng-if="!!user"
+      a href="#" ng-click="toggleModal('login')" ng-bind="user.first_name"
