@@ -19,7 +19,7 @@ module MetadataBuilder
   end
 
   def metadata collection=nil
-    {count: @collection.total_count, page: current_page} if @collection.try(:total_count).present?
+    {count: @collection.total_count, page: current_page.to_i} if @collection.try(:total_count).present?
   end
 
 end

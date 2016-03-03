@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :encrypted_password
       t.string :access_token
       t.string :role
-      t.boolean :super_admin
+      t.boolean :admin, default: false
       t.boolean :is_active, default: true
       t.timestamps null: false
     end

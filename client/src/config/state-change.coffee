@@ -42,15 +42,33 @@ angular.module('client').run [
     # Refactor?
     # this works perfectly though
     evalState =(toState,toParams)->
-      if !!toState.data.authenticated && !!$rootScope.currentUser
+      if toState.data.admin
+        if  (!!$rootScope.currentUser &&  !$rootScope.currentUser.admin) || !$rootScope.currentUser
+          $state.go("site.home")
+          return
+        evalAdmin(toState,toParams)
+      else
+        evalSite(toState,toParams)
+
+    evalAdmin =(toState,toParams)->
+      if !!toState.data.authenticated && !!$rootScope.currentUser &&  !!$rootScope.currentUser.admin
         $state.go(toState.name, toParams)
-      else if !!toState.data.unauthenticated && !!$rootScope.currentUser
-        $state.go("sites.home")
+      else if !!toState.data.unauthenticated && !!$rootScope.currentUser &&  !!$rootScope.currentUser.admin
+        $state.go("admin.dashboard")
       else if !!toState.data.unauthenticated && !$rootScope.currentUser
         $state.go(toState.name, toParams)
       else
-        $state.go("sites.home")
+        $state.go("admin.dashboard")
 
+    evalSite =(toState,toParams)->
+      if !!toState.data.authenticated && !!$rootScope.currentUser
+        $state.go(toState.name, toParams)
+      else if !!toState.data.unauthenticated && !!$rootScope.currentUser
+        $state.go("site.home")
+      else if !!toState.data.unauthenticated && !$rootScope.currentUser
+        $state.go(toState.name, toParams)
+      else
+        $state.go("site.home")
 
     # resets the authenticator flag
     # so that it will go authentication on every state change (if state is authenticable)

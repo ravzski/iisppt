@@ -11,4 +11,5 @@ angular.module('client').config [
         data:
           authenticated: true
           unauthenticated: true
+          admin: false
 ]

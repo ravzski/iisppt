@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20160303071939) do
     t.string   "encrypted_password", limit: 255
     t.string   "access_token",       limit: 255
     t.string   "role",               limit: 255
-    t.boolean  "super_admin"
+    t.boolean  "admin",                          default: false
     t.boolean  "is_active",                      default: true
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
 end

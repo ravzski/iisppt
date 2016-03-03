@@ -1,0 +1,85 @@
+#admin-container .panel
+  position: relative
+  background: $white
+  border: 0
+  margin-bottom: 30px
+  // border: 1px solid $borders
+  +border-radius(2px)
+  .panel-heading
+    font-size: 12px
+    font-weight: 400
+    padding: 10px 20px 5px 20px
+    border-top-left-radius: 1px
+    border-top-right-radius: 1px
+    // border-bottom: 1px solid $borders
+    .panel-title
+      font-size: 12px
+      font-weight: 600
+      text-transform: uppercase
+      display: inline-block
+    .panel-controls
+      float: right
+
+  .panel-body
+    padding: 10px 20px
+    &.panel-full
+      padding: 0px
+    &.panel-sm
+      padding: 5px 10px
+    &.panel-full-pad
+      padding: 20px
+  .panel-footer
+    padding: 20px
+    background-color: $white
+    border-top: 1px solid $borders
+    border-bottom: 1px solid $borders
+    &.compact
+      padding: 0px 10px
+
+  .panel-list
+    padding: 10px
+    ul
+      list-style: none
+      margin: 0px
+      padding: 0px
+      li
+        padding: 10px
+        border-bottom: 1px solid $gray-light
+        &:last-child
+          border-bottom: 0px
+        .title
+          font-weight: 600
+        p
+          font-size: 11px
+          margin-top: 6px
+          margin-bottom: 0px
+  //
+  // .panel-tabs
+  //   margin: 0px
+  //   padding: 0px
+  //   list-style: none
+  //   li
+  //     display: table-cell
+  //     width: 1%
+  //     padding: 10px
+  //     &.active
+  //       background-color: $blue
+  //       a
+  //         color: $white
+
+  .panel-list-footer
+    padding: 7px 15px
+    border-bottom-left-radius: 3px
+    border-bottom-right-radius: 3px
+
+
+  .panel-nav-tab
+    margin: 20px 0px
+    padding: 0px
+    list-style: none
+    li
+      display: inline-block
+      padding: 5px
+      margin-right: 5px
+      &.active
+        border-bottom: 1px solid $blue

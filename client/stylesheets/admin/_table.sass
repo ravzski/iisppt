@@ -1,0 +1,101 @@
+
+.table
+  margin-bottom: 0px
+  thead
+    tr > th
+      padding: 10px 15px
+      &.single-row
+        border-right: 1px solid $gray-light !important
+      &.add-th
+        text-align: center
+        width: 50px
+        border-right: 1px solid $gray-light !important
+        i
+          line-height: 0
+          position: relative
+          top: 3px
+    tr.search-row > th
+      padding: 5px
+  &.table-xs tbody
+    tr > td, tr > th
+      padding: 5px
+
+.table
+  tbody,thead
+    tr > td,tr >th
+      padding: 10px 15px
+
+      &.action-cell-lg
+        width: 150px
+        text-align: center
+      &.action-cell-md
+        width: 100px
+        text-align: center
+      &.action-cell-sm
+        width: 50px
+        text-align: center
+      &.action-cell-xs
+        width: 25px
+        text-align: center
+        padding: 10px
+      &.title-cell
+        background-color: $title-cell
+        width: 100px
+        text-align: center
+        padding: 8px 10px
+        font-weight: bold
+    tr.selected-cell
+      background-color: $primary-bg
+      font-weight: 600
+  &.pushed
+    margin-bottom: 15px
+
+
+.table-hover > tbody > tr:hover
+  background-color: #FDFDFD
+
+.table-panel.table > tbody > tr > td,th
+  padding: 7px 15px
+
+
+.table-borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th
+  border: none
+
+.table > thead:first-child > tr:first-child
+  border-top: 1px solid $borders
+
+.table > thead  tr > th:last-child
+  border-right: 0px
+  &.has-border
+    border-right: 1px solid $gray-light
+
+.table tr th .selectize-control
+  position: relative
+  top: 5px
+
+.table thead.colored tr th
+  background-color: #FDFDFD
+
+.ref-cell
+  width: 110px
+  position: relative
+  text-align: center
+  .alert-middle
+    position: absolute
+    top: 10px
+    left: 25px
+
+
+.details-table
+  tr th
+    line-height: 0px
+    font-weight: 600
+    text-align: center
+    padding: 5px !important
+    position: relative
+    vertical-align: middle !important
+    &:first-child
+      border-left: 0px
+
+.summary-container .table-responsive
+  overflow-x: hidden

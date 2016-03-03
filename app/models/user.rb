@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   include Authenticable
   include TokenProcessor
-
+  include Searchable
+  
   validates :email, presence: true,  uniqueness: true
   after_create :set_access_token
 

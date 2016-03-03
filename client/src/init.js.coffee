@@ -15,6 +15,7 @@ angular.module(
     'Timepicker',
     'SearchComponents',
     'GmapAutocomplete',
-    'Login'
+    'Login',
+    'AdminSidebar'
   ]
 )

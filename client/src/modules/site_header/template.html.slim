@@ -15,4 +15,13 @@
       a href="#" ng-click="toggleModal('register')"  Register
 
     li.pull-right ng-if="!!currentUser"
-      a href="#" ng-click="toggleModal('login')" ng-bind="currentUser.first_name"
+      a href="#" ng-click="userOptions = !userOptions"
+        span ng-bind="currentUser.first_name"
+        i.icon-down
+      ul.user-options ng-show="userOptions"
+        li
+          a href="#" Profile
+        li
+          a href="/admin" ng-if="currentUser.admin" Admin
+        li
+          a ng-click="logout()" Logout

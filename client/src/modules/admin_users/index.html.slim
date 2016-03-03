@@ -1,0 +1,28 @@
+.row
+  .col-xs-12
+    .panel
+      .panel-heading
+        h4 Users
+
+      .panel-body.panel-full
+        table.table.table-hover.table-bordered
+          thead.colored
+            tr
+              th First Name
+              th Last Name
+              th Email
+              th
+          tbody
+            tr ng-repeat="obj in collection"
+              td ng-bind="obj.first_name"
+              td ng-bind="obj.last_name"
+              td ng-bind="obj.email"
+              td.action-cell-sm
+                a.edit-btn href="#" ng-click="toggleForm(obj)" data-position="left"
+                  i.icon-edit
+                a.delete-btn href="#" ng-click="submitDestroy(obj)" data-position="left"
+                  i.icon-delete
+
+
+      .panel-footer.compact
+        div(ng-pagination paginate-count="metadata.count" paginate-page="metadata.page" ng-if="uiState.pagination")
