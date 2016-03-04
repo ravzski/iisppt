@@ -4,7 +4,7 @@ class Api::UsersController < ApiController
   before_action :find_obj, except: [:index, :create]
 
   def index
-    @collection = User.search(query_params).page(current_page)
+    @collection = User.basic_details.search(query_params).page(current_page)
     render_collection
   end
 
@@ -17,20 +17,45 @@ class Api::UsersController < ApiController
     end
   end
 
+  def update
+    if @obj.update_attributes obj_params
+      render json: @obj
+    else
+      render_obj_errors
+    end
+  end
+
+  def destroy
+    render_empty_success unless current_user.admin
+    if @obj.destroy
+      render_empty_success
+    else
+      render_obj_errors
+    end
+  end
+
 
   private
 
   def obj_params
-    params.require(:user).permit(*%i(
-      first_name
-      last_name
-      email
-      password
-    ))
+    if current_user.admin
+      params.require(:user).permit(*%i(
+        password
+        is_active
+      ))
+    else
+      params.require(:user).permit(*%i(
+        first_name
+        last_name
+        email
+        password
+        is_active
+      ))
+    end
   end
 
   def find_obj
-    @obj = User.find(params[:id])
+    @obj = User.basic_details.find(params[:id])
   end
 
 end

@@ -16,6 +16,7 @@ angular.module(
     'SearchComponents',
     'GmapAutocomplete',
     'Login',
-    'AdminSidebar'
+    'AdminSidebar',
+    'ActiveSelect'
   ]
 )

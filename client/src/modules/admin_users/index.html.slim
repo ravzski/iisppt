@@ -11,12 +11,14 @@
               th First Name
               th Last Name
               th Email
+              th Status
               th
           tbody
             tr ng-repeat="obj in collection"
               td ng-bind="obj.first_name"
               td ng-bind="obj.last_name"
               td ng-bind="obj.email"
+              td ng-bind="obj.is_active ? 'Active':'Inactive'"
               td.action-cell-sm
                 a.edit-btn href="#" ng-click="toggleForm(obj)" data-position="left"
                   i.icon-edit
@@ -26,3 +28,24 @@
 
       .panel-footer.compact
         div(ng-pagination paginate-count="metadata.count" paginate-page="metadata.page" ng-if="uiState.pagination")
+
+
+  .modal.open ng-if="uiState.modal"
+    form  name="form"
+      .modal-dialog
+        .modal-header
+          a.btn-close ng-click="toggleForm(null)" ×
+          h4 User
+
+        .modal-body
+          form name="form"
+
+            .form-group
+              label Status
+              span.danger *
+              input status="obj.is_active" active-select="" complete="false"
+
+        .modal-footer
+          .row
+            .col-md-12
+              a.btn.btn-success ng-click="submit(form)" on-change="getResources()"  ng-class="{disabled: uiState.submit}" href="#" Save

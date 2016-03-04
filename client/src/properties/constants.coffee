@@ -3,6 +3,37 @@
 @DEFAULT_PER_PAGE = 10
 @GMAP_API_KEY = "AIzaSyDl3IaifrpvXFz5UCeE4rqwhWdII-tycsk"
 
+
+@STATUS_COLLECTION_ALL= [
+  {
+    label: 'All'
+    value: ''
+  }
+  {
+    label: 'Active'
+    value: 'true'
+  }
+  {
+    label: 'Inactive'
+    value: 'false'
+  }
+
+]
+
+
+@STATUS_COLLECTION= [
+  {
+    label: 'Active'
+    value: 'true'
+  }
+  {
+    label: 'Inactive'
+    value: 'false'
+  }
+
+]
+
+
 @MONTHS = [
   {key: "1", value: "January"},
   {key: "2", value: "Feburary"},

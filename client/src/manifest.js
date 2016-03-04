@@ -6,6 +6,7 @@
 //= require pikaday/pikaday
 //= require jquery-backstretch/jquery.backstretch.min
 //= require jt.timepicker/jquery.timepicker
+//= require sweetalert/dist/sweetalert.min
 
 //= require angular/angular
 //= require angular-sanitize/angular-sanitize.min

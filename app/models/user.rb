@@ -2,10 +2,13 @@ class User < ActiveRecord::Base
   include Authenticable
   include TokenProcessor
   include Searchable
-  
+
   validates :email, presence: true,  uniqueness: true
   after_create :set_access_token
 
+  def self.basic_details
+    select("first_name,last_name,email,is_active,admin,id")
+  end
   #
   # Returns the user's full name
   #
