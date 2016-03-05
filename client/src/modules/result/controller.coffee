@@ -36,12 +36,11 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
     waypts.push {location: $scope.query.via, stopover: true} if $scope.query.via.trim() !=''
     # time = moment(new Date("2016-03-05 5:45 am")).toDate().getTime()
 
-    time= new Date( moment("#{$scope.query.departure_time} #{$scope.query.time}", "M/D/YYYY hA").valueOf())
+    time= new Date( moment("#{$scope.query.departure_time} #{$scope.query.time}", "M/D/YYYY hA")).valueOf()
     directionsService.route {
       origin: $scope.query.from
       destination: $scope.query.to
       travelMode: google.maps.TravelMode.TRANSIT
-      optimizeWaypoints: true,
       provideRouteAlternatives: true
       transitOptions:
         modes: getModes()
