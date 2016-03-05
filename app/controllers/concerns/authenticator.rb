@@ -1,6 +1,10 @@
 module Authenticator
   extend ActiveSupport::Concern
 
+  def validate_admin
+    render_access_denied unless current_user.admin
+  end
+
   def current_user
     @current_user ||= User.find_by_valid_token request_details
   end

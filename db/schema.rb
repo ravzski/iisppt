@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303071939) do
+ActiveRecord::Schema.define(version: 20160304070248) do
+
+  create_table "markers", force: :cascade do |t|
+    t.integer  "creator_id",  limit: 4
+    t.integer  "updator_id",  limit: 4
+    t.float    "lat",         limit: 24
+    t.float    "lng",         limit: 24
+    t.text     "description", limit: 65535
+    t.string   "info_type",   limit: 255
+    t.string   "agency",      limit: 255
+    t.string   "place",       limit: 255
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer  "bank_id",            limit: 4

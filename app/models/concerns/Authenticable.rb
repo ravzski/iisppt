@@ -7,6 +7,8 @@ module Authenticable
   module ClassMethods
 
     def find_by_valid_token request_details
+      return false if !request_details[:user_id].present? || request_details[:user_id] == 'null'
+
       obj = User.find(request_details[:user_id])
       return false unless obj.present?
       if obj.access_token == request_details[:access_token]

@@ -3,6 +3,16 @@
 @DEFAULT_PER_PAGE = 10
 @GMAP_API_KEY = "AIzaSyDl3IaifrpvXFz5UCeE4rqwhWdII-tycsk"
 
+@INFO_TYPE = [
+  {
+    label: 'Crime Details'
+    value: 'Crime Details'
+  }
+  {
+    label: 'Traffic Incident'
+    value: 'Traffic Incident'
+  }
+]
 
 @STATUS_COLLECTION_ALL= [
   {

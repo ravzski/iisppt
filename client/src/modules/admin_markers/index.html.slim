@@ -1,0 +1,35 @@
+.row
+  .col-xs-12
+    .panel
+      .panel-heading
+        h4 ng-bind="query.agency"
+        a.icon-add.pull-left ng-href="/admin/{{agency_scope}}/new"
+
+      .panel-body.panel-full
+        table.table.table-hover.table-bordered
+          thead.colored
+            tr
+              th Place
+              th Start Date
+              th End Date
+              th Logged by
+              th Updated by
+              th
+          tbody
+            tr ng-if="collection.length == 0"
+              td colspan="6" No Data Available
+            tr ng-repeat="obj in collection"
+              td ng-bind="obj.place"
+              td ng-bind="obj.created_at.formatDate()"
+              td ng-bind="!!obj.end_date ? obj.end_date.formatDate() : '--'"
+              td ng-bind="obj.creator_name"
+              td ng-bind="obj.updator_name"
+              td.action-cell-sm
+                a.edit-btn href="#" ng-href="/admin/{{agency_scope}}/{{obj.id}}/edit" data-position="left"
+                  i.icon-edit
+                a.delete-btn href="#" ng-click="submitDestroy(obj)" data-position="left"
+                  i.icon-delete
+
+
+      .panel-footer.compact
+        div(ng-pagination paginate-count="metadata.count" paginate-page="metadata.page" ng-if="uiState.pagination")

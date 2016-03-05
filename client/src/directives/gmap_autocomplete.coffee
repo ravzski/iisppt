@@ -7,4 +7,9 @@ module.directive 'gmapAutocomplete', ->
       types: ['establishment']
       componentRestrictions: {country: 'ph'}
 
-    new (google.maps.places.Autocomplete)(element[0], options)
+    autocomplete = new (google.maps.places.Autocomplete)(element[0], options)
+
+    if !!attrs.gmapCords
+      google.maps.event.addListener autocomplete, 'place_changed', ->
+        $('#lat').val this.getPlace().geometry.location.lat()
+        $('#lng').val this.getPlace().geometry.location.lng()

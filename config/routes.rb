@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users
+    resources :markers
 
     get "/search", to: 'search#index'
 

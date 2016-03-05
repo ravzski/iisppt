@@ -17,6 +17,7 @@ angular.module(
     'GmapAutocomplete',
     'Login',
     'AdminSidebar',
-    'ActiveSelect'
+    'ActiveSelect',
+    'AdminMarker'
   ]
 )

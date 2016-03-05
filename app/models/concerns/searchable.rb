@@ -18,6 +18,12 @@ module Searchable
     is_active
     admin
     id
+    agency
+  )
+
+  # fields where query must be in (?)
+  ARRAY_FIELDS = %w(
+    resource_id
   )
 
   #

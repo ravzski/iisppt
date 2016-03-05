@@ -1,0 +1,79 @@
+.row
+  .col-xs-12
+    .panel
+      .panel-heading
+        h4 ng-bind="agency"
+
+      form name="form" ng-show="!!marker"
+        .panel-body
+          input#lat.hidden ng-model="marker.lat"
+          input#lng.hidden ng-model="marker.lng"
+          .row
+            .col-md-6
+              .form-group
+                label Place
+                span.danger *
+                input#place.form-control(
+                  gmap-autocomplete=""
+                  gmap-cords="true"
+                  type="text"
+                  name="place"
+                  ng-model="marker.place"
+                  required=""
+                  ng-enter="submit(form)"
+                  placeholder="Location, Address, Landmark"
+                  ng-class="{error: form.place.$error.required && form.$submitted}")
+
+              .form-group
+                label Information Type
+                span.danger *
+                select.form-control.toggable-field(
+                  ng-model="marker.info_type"
+                  required=""
+                  name="info_type"
+                  ng-enter="submit(form)"
+                  ng-options="obj.value as obj.label for obj in info_types"
+                  ng-class="{error: form.info_type.$error.required && form.$submitted}"
+                )
+
+            .col-md-6
+              .form-group
+                label Date Created
+                input.form-control(
+                  type="text"
+                  name="created_at"
+                  ng-model="marker.created_at"
+                  ng-enter="submit(form)"
+                  ng-class="{error: form.created_at.$error.required && form.$submitted}")
+
+              .form-group
+                label End Date
+                span.danger
+                input.form-control.date-picker(
+                  date-picker=""
+                  type="text"
+                  name="end_date"
+                  ng-model="marker.end_date"
+                  ng-enter="submit(form)"
+                  ng-class="{error: form.end_date.$error.required && form.$submitted}")
+
+          .row
+            .col-md-12
+              .form-group
+              label Description
+              span.danger *
+              textarea.form-control(
+                name="description"
+                ng-model="marker.description"
+                ng-enter="submit(form)"
+                rows="10"
+                ng-class="{error: form.description.$error.required && form.$submitted}")
+
+
+        .panel-footer
+          .row
+            .col-md-12
+              a.btn-default.btn.pull-left ng-href="/admin/{{agency_scope}}" Back
+              .btn-group.pull-right
+                a.btn-danger.btn ng-click="submitDestroy()" Delete
+                a.btn-primary.btn ng-click="submit(form)" Save

@@ -1,6 +1,7 @@
 class Api::UsersController < ApiController
 
-  skip_before_action :authenticate_request, only: %w(create)
+  skip_before_action :authenticate_request, only: :create
+  before_action :validate_admin, except: [:create, :update]
   before_action :find_obj, except: [:index, :create]
 
   def index
@@ -38,7 +39,7 @@ class Api::UsersController < ApiController
   private
 
   def obj_params
-    if current_user.admin
+    if current_user.present? && current_user.admin
       params.require(:user).permit(*%i(
         password
         is_active
@@ -49,7 +50,6 @@ class Api::UsersController < ApiController
         last_name
         email
         password
-        is_active
       ))
     end
   end
