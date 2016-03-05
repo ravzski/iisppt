@@ -10,6 +10,7 @@
           thead.colored
             tr
               th Place
+              th Info
               th Start Date
               th End Date
               th Logged by
@@ -20,6 +21,7 @@
               td colspan="6" No Data Available
             tr ng-repeat="obj in collection"
               td ng-bind="obj.place"
+              td ng-bind="obj.info_type"
               td ng-bind="obj.created_at.formatDate()"
               td ng-bind="!!obj.end_date ? obj.end_date.formatDate() : '--'"
               td ng-bind="obj.creator_name"
