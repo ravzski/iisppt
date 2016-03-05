@@ -12,6 +12,18 @@
     label: 'Traffic Incident'
     value: 'Traffic Incident'
   }
+  {
+    label: 'Sights and Tourist Spot'
+    value: 'Sights and Tourist Spot'
+  }
+  {
+    label: 'Historical Landmark'
+    value: 'Historical Landmark'
+  }
+  {
+    label: 'Public Facilities'
+    value: 'Public Facilities'
+  }
 ]
 
 @STATUS_COLLECTION_ALL= [
