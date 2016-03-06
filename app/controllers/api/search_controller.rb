@@ -1,7 +1,7 @@
 class Api::SearchController < ApiController
 
   def index
-    render json: Gmap::Directions.new(a).build
+    render json: Gmap::MetaData.new(params).build
   end
 
 end

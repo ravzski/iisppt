@@ -31,6 +31,8 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Marker)->
 
   evalAction = ->
     $scope.marker.place = $('#place').val()
+    $scope.marker.lat = $('#lat').val()
+    $scope.marker.lng = $('#lng').val()
     if !!$scope.marker.id
       update()
     else

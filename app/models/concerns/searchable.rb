@@ -34,6 +34,8 @@ module Searchable
   included do
     scope :search, -> query { where(extract_query(query).join(' and ')) if query.present? }
     scope :filter_in, -> field,arr { where("#{field} in (?)", arr) if arr.present?}
+    scope :filter_out, -> field,arr { where("#{field} not in (?)", arr) if arr.present?}
+
     # similar to filter in but can be used in joins
     scope :array_filter, -> field,arr { sanitize_sql_array(["#{field} in (?)", arr]) if arr.present? }
   end

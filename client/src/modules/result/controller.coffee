@@ -1,10 +1,11 @@
-Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
 
+  $scope.currentIndex = 0
   $rootScope.headerClass = ""
   $scope.uiState =
     noRoute: false
     showRating: false
-
+  $scope.routes = null
   $scope.query =
     from: $state.params.from
     to: $state.params.to
@@ -21,38 +22,87 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
     map = new (google.maps.Map)(document.getElementById('map'),
       zoom: 7
       center:
-        lat: 41.85
-        lng: -87.65)
+        lat: 14.5800
+        lng: 121.0000)
     directionsDisplay.setMap map
     directionsDisplay.setPanel document.getElementById('direction-panel')
     $scope.calculateAndDisplayRoute()
 
-    # $http.get("/api/search",{params: $scope.query}).
-    #   success (data)->
 
   $scope.calculateAndDisplayRoute = ->
     $scope.uiState.showRating = false
-    waypts = []
-    waypts.push {location: $scope.query.via, stopover: true} if $scope.query.via.trim() !=''
-    # time = moment(new Date("2016-03-05 5:45 am")).toDate().getTime()
-
-    time= new Date( moment("#{$scope.query.departure_time} #{$scope.query.time}", "M/D/YYYY hA")).valueOf()
+    time= moment("#{$scope.query.time}", ["h:mm A"]).format("HH:mm");
     directionsService.route {
       origin: $scope.query.from
       destination: $scope.query.to
       travelMode: google.maps.TravelMode.TRANSIT
       provideRouteAlternatives: true
+      optimizeWaypoints: true
       transitOptions:
         modes: getModes()
-        departureTime: time
+        departureTime: new Date("#{$scope.query.departure_time} #{time}")
     }, (response, status) ->
+      $scope.uiState.noRoute = true
       if status == google.maps.DirectionsStatus.OK
-        $scope.uiState.showRating = true
-        $scope.$apply()
         directionsDisplay.setDirections response
+        $timeout (->
+          $scope.extractKeyLocations(response.routes,0)
+        ), 500
       else
         $scope.uiState.noRoute = true
         $scope.$apply()
+
+  $scope.extractKeyLocations =(routes,index)->
+    lat = []
+    lng = []
+    for obj in routes[index].legs[0].steps
+      lat.push obj.start_location.lat()
+      lng.push obj.start_location.lng()
+
+    $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng}).
+      success (data)->
+        for obj in data
+          element = $("[data-step-index=#{obj.step_index}] td")
+          element.append(buildEventPanel(obj))
+        # for obj in data
+        #   unless !!$scope.routes[$scope.currentIndex].legs[0].steps[obj.step_index][obj.info_type]
+        #     $scope.routes[$scope.currentIndex].legs[0].steps[obj.step_index][obj.info_type] =
+        #       events: obj.events
+
+        $scope.uiState.showRating = true
+        $scope.uiState.noRoute = false
+        # for location in data
+        #   for obj in $('.adp-substep').find('b')
+        #     if obj.textContent != '' && location.request_place == obj.textContent
+        #       $(obj.parentElement).append('<td>'+location.event+'</td>')
+        #       break
+
+  buildEventPanel =(obj)->
+    events = ""
+    for event in obj.events
+      events+= buildEvenList(event)
+
+    "<div class='event-panel'>
+      <h4 class='title'>
+        #{obj.info_type}
+      </h4>
+      <ul class='event-list'>
+        #{events}
+      </ul>
+    </div>"
+
+  buildEvenList =(event)->
+    " <li>
+      <div class='event-place'>
+        #{event.place}
+      </div>
+      <div class='event-desc'>
+        #{event.description}
+      </div>
+      <div class='event-date'>
+        #{event.created_at.formatTimestamp()}
+      </div>
+    </li>"
 
   getModes = ->
     modes = []
@@ -69,5 +119,5 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout']
 angular.module('client').controller('ResultCtrl', Ctrl)

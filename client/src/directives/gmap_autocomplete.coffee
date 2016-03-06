@@ -4,7 +4,6 @@ module.directive 'gmapAutocomplete', ->
 
   link: ($scope, element, attrs) ->
     options =
-      types: ['establishment']
       componentRestrictions: {country: 'ph'}
 
     autocomplete = new (google.maps.places.Autocomplete)(element[0], options)
