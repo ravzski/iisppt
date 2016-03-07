@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307152955) do
+ActiveRecord::Schema.define(version: 20160307172435) do
 
   create_table "markers", force: :cascade do |t|
     t.integer  "creator_id",  limit: 4
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160307152955) do
     t.boolean  "is_active",                      default: true
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.integer  "mobile_number",      limit: 4
   end
 
 end

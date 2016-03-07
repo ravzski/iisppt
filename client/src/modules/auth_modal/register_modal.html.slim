@@ -40,6 +40,16 @@
           placeholder="Email"
           ng-class="{error: (form.email.$error.required && form.$submitted) || emailErr}")
 
+
+      .form-group
+        label Mobile Number
+        input.form-control(
+          type="text"
+          name="mobile_number"
+          ng-model="user.mobile_number"
+          ng-enter="register(form)"
+          placeholder="Mobile number")
+
       .form-group
         label Password
         input.form-control(

@@ -50,6 +50,7 @@ class Api::UsersController < ApiController
         last_name
         email
         password
+        mobile_number
       ))
     end
   end
