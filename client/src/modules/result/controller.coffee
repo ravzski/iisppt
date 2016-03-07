@@ -38,7 +38,6 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
   $scope.calculateAndDisplayRoute = ->
     $scope.uiState.showDirection = false
     directionsService.route directionOptions(), (response, status) ->
-      $scope.uiState.noRoute = true
       if status == google.maps.DirectionsStatus.OK
         directionsDisplay.setDirections response
         availableRoutes = response.routes
