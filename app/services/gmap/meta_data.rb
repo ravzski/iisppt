@@ -2,6 +2,7 @@ module Gmap
   class MetaData < Base
 
     def build
+      result= {collection: [], rating: nil}
       collection = []
       existing_ids = []
 
@@ -13,13 +14,27 @@ module Gmap
             existing_ids.push obj.id
             temp[:events].push metadata_details(obj)
           end
-          collection.push temp
+          result[:collection].push temp
         end
       end
-      collection
+      result[:rating] = user_rating.present? ? user_rating.rating : 0
+      result
     end
 
     private
+
+    def user_rating
+      @user_rating ||= RouteRating.where_location(route_rating_params).first
+    end
+
+    def route_rating_params
+      {
+        from: @from,
+        to: @to,
+        route_index: @route_index,
+        user_id: @user_id
+      }
+    end
 
     def metadata_details obj
       {

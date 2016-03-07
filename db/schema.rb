@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304070248) do
+ActiveRecord::Schema.define(version: 20160307152955) do
 
   create_table "markers", force: :cascade do |t|
     t.integer  "creator_id",  limit: 4
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20160304070248) do
     t.string   "agency",      limit: 255
     t.string   "place",       limit: 255
     t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "route_ratings", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "rating",      limit: 4
+    t.string   "from_place",  limit: 255
+    t.string   "to_place",    limit: 255
+    t.integer  "route_index", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end

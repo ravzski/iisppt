@@ -89,6 +89,7 @@
   NEW_NOTIFICATION: "New Notification"
   PASSWORD_NOT_MATCH: "Password did not match"
   INVALID_EMAIL: "Invalid Email"
+  MUST_BE_LOGGED_IN: "You must login to rate"
 
 @DELETE_WARNING = {
     title: 'Are you sure?'

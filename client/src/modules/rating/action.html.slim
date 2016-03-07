@@ -1,0 +1,4 @@
+ul.rating-list
+  li ng-repeat="n in [] | range:max_rating"
+    a.icon-star-two ng-if="rating >= n" ng-click="rate(n)"
+    a.icon-star ng-if="rating < n" ng-click="rate(n)"

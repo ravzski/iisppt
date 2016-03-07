@@ -14,6 +14,7 @@ angular.module('client').factory('httpInterceptor', [
             $injector.get('$state').go("sites.home")
           when 500,422
             $.growl.error {message: message}
+            
         $q.reject(response)
 
     }

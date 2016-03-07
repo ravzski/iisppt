@@ -1,0 +1,6 @@
+.rating-list-module-cont
+  ul.rating-list
+    li ng-repeat="n in [] | range:max_rating"
+      a ng-class="getClass(n)"
+
+  span.total-text ng-bind="totalText()" ng-if="!!count"

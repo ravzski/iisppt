@@ -12,39 +12,15 @@
       h4 Suggested Routes:
       ul
         li ng-repeat="obj in routes" ng-click="changeRoutes(obj.index)" ng-class="{'current': currentIndex == $index}"
-          div ng-bind-html="obj.template"
-          ul.rating-list
-            li
-              a ng-click="rate(1)" href="#"
-                i.icon-star
-            li
-              a ng-click="rate(2)"
-                i.icon-star
-            li
-              a ng-click="rate(3)"
-                i.icon-star
-            li
-              a ng-click="rate(4)"
-                i.icon-star
-            li
-              a ng-click="rate(5)"
-                i.icon-star
-
+          .route-summary ng-bind-html="obj.template"
+          ul route-rating="" avg="obj.avg" count="obj.count"
 
 #secondary-panel ng-show="!uiState.noRoute && uiState.showDirection"
   .rating-container
     h5 Rate this route
-    ul.rating-list
-      li
-        a.icon-star
-      li
-        a.icon-star
-      li
-        a.icon-star
-      li
-        a.icon-star
-      li
-        a.icon-star
+    ul route-rating-action="" rating="currentRating" from="query.from" to="query.to" index="currentIndex"
+
+
 
   #direction-panel
 

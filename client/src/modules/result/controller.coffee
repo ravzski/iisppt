@@ -1,4 +1,4 @@
-Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
 
   markerArray = []
   stepDisplay = new google.maps.InfoWindow
@@ -57,20 +57,37 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce)->
       lat.push obj.start_location.lat()
       lng.push obj.start_location.lng()
       createMarkers(obj)
-      
-    $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng}).
+
+    $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng, from: $scope.query.from, to: $scope.query.to, route_index: $scope.currentIndex}).
       success (data)->
-        $scope.buildEvents(data)
+        $scope.buildEvents(data.collection)
+        $scope.currentRating = data.rating
         $scope.uiState.showDirection = true
         $scope.uiState.noRoute = false
 
   $scope.buildAvaiableRoutes= ->
     $scope.routes= []
-    for obj,i in $('.adp-list ol li')
-      temp =
-        template: obj.innerHTML
-        index: i
-      $scope.routes.push temp
+    ratings = null
+    Rating.query(from: $scope.query.from, to: $scope.query.to).$promise
+      .then (data) ->
+
+        for obj,i in $('.adp-list ol li')
+          count = 0
+          sum = 0
+          for r in data
+            if r.route_index == i
+              sum = r.ratings_sum
+              count = r.ratings_count
+              break
+
+          temp =
+            template: obj.innerHTML
+            index: i
+            avg: if sum == 0  then 0 else (sum/count)
+            count: count
+
+          $scope.routes.push temp
+
 
   $scope.buildEvents =(data)->
     $('.event-panel').remove()
@@ -156,5 +173,5 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating']
 angular.module('client').controller('ResultCtrl', Ctrl)

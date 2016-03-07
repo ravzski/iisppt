@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :markers
+    resources :route_ratings
 
     get "/search", to: 'search#index'
 

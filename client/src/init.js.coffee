@@ -18,6 +18,7 @@ angular.module(
     'Login',
     'AdminSidebar',
     'ActiveSelect',
-    'AdminMarker'
+    'AdminMarker',
+    'Rating'
   ]
 )
