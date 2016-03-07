@@ -1,10 +1,14 @@
-Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce)->
 
+  markerArray = []
+  stepDisplay = new google.maps.InfoWindow
   $scope.currentIndex = 0
   $rootScope.headerClass = ""
   $scope.uiState =
     noRoute: false
     showRating: false
+    showDirection: false
+
   $scope.routes = null
   $scope.query =
     from: $state.params.from
@@ -15,8 +19,10 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
     via: ''
     time: $state.params.time || new Date().valueOf()
 
+  availableRoutes = []
   directionsDisplay = new (google.maps.DirectionsRenderer)
   directionsService = new (google.maps.DirectionsService)
+  map = {}
 
   initMap = ->
     map = new (google.maps.Map)(document.getElementById('map'),
@@ -30,9 +36,66 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
 
 
   $scope.calculateAndDisplayRoute = ->
-    $scope.uiState.showRating = false
+    $scope.uiState.showDirection = false
+    directionsService.route directionOptions(), (response, status) ->
+      $scope.uiState.noRoute = true
+      if status == google.maps.DirectionsStatus.OK
+        directionsDisplay.setDirections response
+        availableRoutes = response.routes
+        $timeout (->
+          $scope.buildAvaiableRoutes()
+          $scope.extractKeyLocations(0)
+        ), 500
+      else
+        $scope.uiState.noRoute = true
+        $scope.$apply()
+
+  $scope.extractKeyLocations =(index)->
+    lat = []
+    lng = []
+    for obj in availableRoutes[index].legs[0].steps
+      lat.push obj.start_location.lat()
+      lng.push obj.start_location.lng()
+      createMarkers(obj)
+      
+    $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng}).
+      success (data)->
+        $scope.buildEvents(data)
+        $scope.uiState.showDirection = true
+        $scope.uiState.noRoute = false
+
+  $scope.buildAvaiableRoutes= ->
+    $scope.routes= []
+    for obj,i in $('.adp-list ol li')
+      temp =
+        template: obj.innerHTML
+        index: i
+      $scope.routes.push temp
+
+  $scope.buildEvents =(data)->
+    $('.event-panel').remove()
+    for obj in data
+      element = $("[data-step-index=#{obj.step_index}] td")
+      element.append(buildEventPanel(obj))
+
+  $scope.changeRoutes =(index)->
+    $scope.uiState.showDirection = false
+    $scope.currentIndex = index
+    $("[data-route-index=#{index}]").click()
+    $timeout (->
+      $scope.extractKeyLocations(index)
+    ), 500
+
+  createMarkers =(obj)->
+    marker = new (google.maps.Marker)
+    markerArray.push marker
+    marker.setMap map
+    marker.setPosition obj.start_location
+    attachInstructionText stepDisplay, marker, obj.instructions, map
+
+  directionOptions = ->
     time= moment("#{$scope.query.time}", ["h:mm A"]).format("HH:mm");
-    directionsService.route {
+    opt =
       origin: $scope.query.from
       destination: $scope.query.to
       travelMode: google.maps.TravelMode.TRANSIT
@@ -41,41 +104,14 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
       transitOptions:
         modes: getModes()
         departureTime: new Date("#{$scope.query.departure_time} #{time}")
-    }, (response, status) ->
-      $scope.uiState.noRoute = true
-      if status == google.maps.DirectionsStatus.OK
-        directionsDisplay.setDirections response
-        $timeout (->
-          $scope.extractKeyLocations(response.routes,0)
-        ), 500
-      else
-        $scope.uiState.noRoute = true
-        $scope.$apply()
+    opt
 
-  $scope.extractKeyLocations =(routes,index)->
-    lat = []
-    lng = []
-    for obj in routes[index].legs[0].steps
-      lat.push obj.start_location.lat()
-      lng.push obj.start_location.lng()
-
-    $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng}).
-      success (data)->
-        for obj in data
-          element = $("[data-step-index=#{obj.step_index}] td")
-          element.append(buildEventPanel(obj))
-        # for obj in data
-        #   unless !!$scope.routes[$scope.currentIndex].legs[0].steps[obj.step_index][obj.info_type]
-        #     $scope.routes[$scope.currentIndex].legs[0].steps[obj.step_index][obj.info_type] =
-        #       events: obj.events
-
-        $scope.uiState.showRating = true
-        $scope.uiState.noRoute = false
-        # for location in data
-        #   for obj in $('.adp-substep').find('b')
-        #     if obj.textContent != '' && location.request_place == obj.textContent
-        #       $(obj.parentElement).append('<td>'+location.event+'</td>')
-        #       break
+  attachInstructionText = (stepDisplay, marker, text, map) ->
+    google.maps.event.addListener marker, 'click', ->
+      # Open an info window when the marker is clicked on, containing the text
+      # of the step.
+      stepDisplay.setContent text
+      stepDisplay.open map, marker
 
   buildEventPanel =(obj)->
     events = ""
@@ -110,6 +146,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
     modes.push "RAIL" if $scope.query.rail
     modes
 
+
   initMap()
 
   $scope.search = ->
@@ -119,5 +156,5 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce']
 angular.module('client').controller('ResultCtrl', Ctrl)
