@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307172435) do
+ActiveRecord::Schema.define(version: 20160307191312) do
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "place",      limit: 255
+    t.string   "event",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "markers", force: :cascade do |t|
     t.integer  "creator_id",  limit: 4

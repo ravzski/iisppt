@@ -94,6 +94,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
       element = $("[data-step-index=#{obj.step_index}] td")
       element.append(buildEventPanel(obj))
 
+
   $scope.changeRoutes =(index)->
     $scope.uiState.showDirection = false
     $scope.currentIndex = index
@@ -133,15 +134,32 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
     events = ""
     for event in obj.events
       events+= buildEvenList(event)
+      image = '/images/crime.png'
+      beachMarker = new (google.maps.Marker)(
+        position:
+          lat: event.lat
+          lng: event.lng
+        map: map
+        icon: image)
 
     "<div class='event-panel'>
       <h4 class='title'>
+        <i class='#{buildEventIcon(obj.info_type)}'></i>
         #{obj.info_type}
       </h4>
       <ul class='event-list'>
         #{events}
       </ul>
     </div>"
+
+  buildEventIcon =(event)->
+    switch event
+      when "Crime Details"
+        "icon-crime"
+      when "Traffic Incident"
+        "icon-traffic"
+      else
+        "icon-inst"
 
   buildEvenList =(event)->
     " <li>

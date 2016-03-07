@@ -42,7 +42,9 @@ module Gmap
         place: obj.place,
         agency: obj.agency,
         description: obj.description,
-        created_at: obj.created_at
+        created_at: obj.created_at,
+        lat: obj.lat,
+        lng: obj.lng
       }
     end
 
