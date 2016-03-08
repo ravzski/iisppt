@@ -17,7 +17,7 @@ gem 'angular-rails-templates','0.1.3'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'google_maps_service'
-
+gem 'plivo', git: 'git@github.com:ravzski/plivo-ruby.git', branch: 'master'
 group :production do
   gem 'rails_12factor'
 end
