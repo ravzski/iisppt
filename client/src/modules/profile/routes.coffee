@@ -4,8 +4,7 @@ angular.module('client').config [
 
     $stateProvider
       .state 'site.profile',
-        url: '',
+        url: 'profile',
         controller: 'ProfileCtrl',
         templateUrl: 'modules/profile/index.html'
-
 ]

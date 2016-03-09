@@ -51,12 +51,14 @@ class Api::UsersController < ApiController
         email
         password
         mobile_number
+        is_active
       ))
     end
   end
 
   def find_obj
     @obj = User.basic_details.find(params[:id])
+    render_empty_success if @obj.id != current_user.id && !current_user.admin
   end
 
 end

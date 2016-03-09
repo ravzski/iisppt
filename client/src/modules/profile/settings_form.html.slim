@@ -1,0 +1,43 @@
+.profile-form
+  .sub-panel-header
+    h4 Settings
+  .sub-panel-body
+    form name="settingsForm"
+      .form-group
+        label Old Password
+        input.form-control(
+          type="text"
+          name="old_password"
+          ng-model="password.old"
+          required=""
+          ng-enter="changePassword(settingsForm)"
+          placeholder="Old Password"
+          ng-class="{error: settingsForm.old_password.$error.required && settingsForm.$submitted}")
+
+      .form-group
+        label New Password
+        input.form-control(
+          type="text"
+          name="new_pass"
+          ng-model="password.new"
+          required=""
+          ng-enter="changePassword(settingsForm)"
+          placeholder="New Password"
+          ng-class="{error: settingsForm.new_pass.$error.required && settingsForm.$submitted}")
+
+
+      .form-group
+        label Confirm Password
+        input.form-control(
+          type="text"
+          name="confirm"
+          ng-model="password.confirm"
+          required=""
+          ng-enter="changePassword(settingsForm)"
+          placeholder="Confirm Password"
+          ng-class="{error: (settingsForm.confirm.$error.required && settingsForm.$submitted) || emailErr}")
+
+
+  .sub-panel-footer
+    a.btn.btn-danger.pull-left ng-click="deactivate()" Deactive Account
+    a.btn.btn-primary.pull-right ng-click="changePassword(settingsForm)" Save

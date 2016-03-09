@@ -4,7 +4,6 @@ angular.module('client').run [
     # authenticator flag serves as
     # a flagger if on state change, the token is still valid
     $rootScope.authenticatorFlag = true
-
     $rootScope.toggleModal =(state)->
       if state == 'login'
         $rootScope.loginModal = true
@@ -20,6 +19,7 @@ angular.module('client').run [
       # thus clearing the rootScope.currentUser
       authToken = localStorage.getItem('AuthToken')
       userId = localStorage.getItem('UserId')
+      $rootScope.userOptions = false
 
       if $rootScope.authenticatorFlag
         event.preventDefault()

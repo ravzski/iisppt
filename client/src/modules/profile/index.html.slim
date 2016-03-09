@@ -1,0 +1,22 @@
+.bg-slideshow home-backstretch=""
+
+.panel.profile-panel ng-class="{'expanded': expanded}"
+  .row
+    .col-md-3.profile-menu-container
+      ul.profile-menu
+        li.menu
+          span Menu
+        li ng-class="{'active': uiState.state == 'personal'}"
+          a href="#" ng-click="changeState('personal')" Personal
+        li ng-class="{'active': uiState.state == 'settings'}"
+          a href="#" ng-click="changeState('settings')" Settings
+        li ng-class="{'active': uiState.state == 'notifications'}"
+          a href="#" ng-click="changeState('notifications')" Notifications
+        li
+          a href="#" Logout
+
+    .col-md-9.profile-body-container
+      .panel-body
+        div profile-form="" ng-if="uiState.state == 'personal'"
+        div settings-form="" ng-if="uiState.state == 'settings'"
+        div notifications-form="" ng-if="uiState.state == 'notifications'"

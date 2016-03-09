@@ -1,0 +1,51 @@
+.profile-form
+  .sub-panel-header
+    h4 Personal
+  .sub-panel-body
+    form name="updateForm"
+      .form-group
+        label First Name
+        input.form-control(
+          type="text"
+          name="first_name"
+          ng-model="currentUser.first_name"
+          required=""
+          ng-enter="update(updateForm)"
+          placeholder="First Name"
+          ng-class="{error: updateForm.first_name.$error.required && updateForm.$submitted}")
+
+      .form-group
+        label Last Name
+        input.form-control(
+          type="text"
+          name="last_name"
+          ng-model="currentUser.last_name"
+          required=""
+          ng-enter="update(updateForm)"
+          placeholder="Last Name"
+          ng-class="{error: updateForm.last_name.$error.required && updateForm.$submitted}")
+
+
+      .form-group
+        label Email
+        input.form-control(
+          type="email"
+          name="email"
+          ng-model="currentUser.email"
+          required=""
+          ng-enter="update(updateForm)"
+          placeholder="Email"
+          ng-class="{error: (updateForm.email.$error.required && updateForm.$submitted) || emailErr}")
+
+
+      .form-group
+        label Mobile Number
+        input.form-control(
+          type="text"
+          name="mobile_number"
+          ng-model="currentUser.mobile_number"
+          ng-enter="update(updateForm)"
+          placeholder="Mobile number")
+
+  .sub-panel-footer
+    a.btn.btn-primary.pull-right ng-click="update(updateForm)" Save

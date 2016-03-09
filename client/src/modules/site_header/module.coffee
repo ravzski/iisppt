@@ -2,8 +2,8 @@ module = angular.module("SiteHeader", [])
 
 
 module.directive 'siteHeader', [
-  '$location',
-  ($location) ->
+  '$location','$rootScope'
+  ($location,$rootScope) ->
 
     restrict: 'A'
     replace: true
@@ -11,6 +11,9 @@ module.directive 'siteHeader', [
 
     link: ($scope, $element, $attrs) ->
       $scope.location = $location
+
+      $scope.toggleSubMenu = ->
+        $rootScope.userOptions = !$rootScope.userOptions
 
       $scope.toggleMenu =(section) ->
         $scope.activeRootUrl =

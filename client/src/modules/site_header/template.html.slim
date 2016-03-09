@@ -15,12 +15,12 @@
       a href="#" ng-click="toggleModal('register')"  Register
 
     li.pull-right ng-if="!!currentUser"
-      a href="#" ng-click="userOptions = !userOptions"
+      a href="#" ng-click="toggleSubMenu()"
         span ng-bind="currentUser.first_name"
         i.icon-down
       ul.user-options ng-show="userOptions"
         li
-          a href="#" Profile
+          a href="/profile" Profile
         li
           a href="/admin" ng-if="currentUser.admin" Admin
         li
