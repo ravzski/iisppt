@@ -25,7 +25,8 @@ module Sessions
         first_name: @current_user.first_name,
         last_name: @current_user.last_name,
         email: @current_user.email,
-        admin: @current_user.admin
+        admin: @current_user.admin,
+        mobile_number: @current_user.mobile_number
       }
     end
 

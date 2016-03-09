@@ -1,7 +1,7 @@
 class Api::UsersController < ApiController
 
   skip_before_action :authenticate_request, only: :create
-  before_action :validate_admin, except: [:create, :update]
+  before_action :validate_admin, except: [:create, :update,:show]
   before_action :find_obj, except: [:index, :create]
 
   def index
@@ -48,26 +48,21 @@ class Api::UsersController < ApiController
   end
 
   def obj_params
-    if current_user.present? && current_user.admin
-      params.require(:user).permit(*%i(
-        password
-        is_active
-      ))
-    else
-      params.require(:user).permit(*%i(
-        first_name
-        last_name
-        email
-        password
-        mobile_number
-        is_active
-      ))
-    end
+    params.require(:user).permit(*%i(
+      first_name
+      last_name
+      email
+      password
+      mobile_number
+      is_active
+    ))
   end
 
   def find_obj
     @obj = User.basic_details.find(params[:id])
-    render_empty_success if @obj.id != current_user.id && !current_user.admin
+    if @obj.id != current_user.id
+      render_empty_success unless current_user.admin
+    end
   end
 
 end

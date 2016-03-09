@@ -64,15 +64,12 @@ Ctrl = ($scope,$http,$timeout,$rootScope,Alert)->
   $scope.create =(form)->
     form.$submitted = true
     if form.$valid
+      $scope.alert.creator_name = $rootScope.currentUser.fullName()
+      $scope.collection.unshift $scope.alert
       Alert.save(alert: $scope.alert).$promise
-        .then (data) ->
-          data.creator_name = $rootScope.currentUser.fullName()
-          $scope.collection.unshift data
-          $.growl.notice {message: MESSAGES.CREATE_SUCCESS}
-          $scope.uiState.modal = false
-        .finally ->
-          $scope.uiState.submit = false
-
+      $.growl.notice {message: MESSAGES.CREATE_SUCCESS}
+      $scope.uiState.modal = false
+  
   # update =(obj,index)->
   #   Alert.update({id: obj.id}, Alert: obj).$promise
   #     .then (data) ->

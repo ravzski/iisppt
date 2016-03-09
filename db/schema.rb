@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309075501) do
+ActiveRecord::Schema.define(version: 20160309095149) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "place",         limit: 255
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160309075501) do
     t.boolean  "is_active",                      default: true
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.integer  "mobile_number",      limit: 4
+    t.string   "mobile_number",      limit: 255
   end
 
 end
