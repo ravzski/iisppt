@@ -1,7 +1,7 @@
 class Api::SearchController < ApiController
 
   def index
-    render json: Gmap::MetaData.new(params.merge({user_id: current_user.id})).build
+    render json: Gmap::MetaData.new(eval_params).build
   end
 
   private
