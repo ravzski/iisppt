@@ -10,6 +10,9 @@ module = ($resource)->
         isArray: false
       update:
         method: 'PATCH'
+      updateAlerts:
+        method: 'POST'
+        url: "/api/user_alerts"
       search:
         method: 'GET'
         isArray: true

@@ -9,6 +9,10 @@ class Api::UsersController < ApiController
     render_collection
   end
 
+  def show
+    render json: {alerts: user_alerts}
+  end
+
   def create
     @obj = User.new obj_params
     if @obj.save
@@ -37,6 +41,11 @@ class Api::UsersController < ApiController
 
 
   private
+
+  def user_alerts
+    alerts = UserAlert.select("facility_type, facility_name").where(user_id: current_user.id)
+    alerts.present? ? alerts : []
+  end
 
   def obj_params
     if current_user.present? && current_user.admin

@@ -8,13 +8,13 @@
           img src="https://maps.gstatic.com/mapfiles/transit/iw2/6/tram.png"
           h4 Trains
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox" ng-checked="isAlertExisiting('Train','LRT 1')" ng-change="updateNotif('Train','LRT 1')"
           span LRT 1
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox"   ng-checked="isAlertExisiting('Train','LRT 2')" ng-change="updateNotif('Train','LRT 2')"
           span LRT 2
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox" ng-checked="isAlertExisiting('Train','MRT 1')" ng-change="updateNotif('Train','MRT 1')"
           span MRT 1
 
       .col-md-3.col-md-offset-3
@@ -22,14 +22,14 @@
           img src="https://maps.gstatic.com/mapfiles/transit/iw2/6/bus.png"
           h4 Bussess
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox"  ng-change="updateNotif('Bus','BUS Co. X')" ng-checked="isAlertExisiting('Bus','BUS Co. X')"
           span BUS Co. X
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox"  ng-change="updateNotif('Bus','BUS Co. Y')" ng-checked="isAlertExisiting('Bus','BUS Co. Y')"
           span BUS Co. Y
         .checkbox-row.block
-          input.form-control type="checkbox"
+          input.form-control type="checkbox"  ng-change="updateNotif('Bus','BUS Co. Z')" ng-checked="isAlertExisiting('Bus','BUS Co. Z')"
           span BUS Co. z
 
   .sub-panel-footer
-    a.btn.btn-primary.pull-right ng-click="updateNotif()" Save
+    a.btn.btn-primary.pull-right ng-click="saveNotifs()" Save

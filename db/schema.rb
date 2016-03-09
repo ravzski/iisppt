@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309004143) do
+ActiveRecord::Schema.define(version: 20160309075501) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "place",         limit: 255
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 20160309004143) do
     t.boolean  "orientation"
     t.integer  "user_id",     limit: 4
     t.float    "lng",         limit: 24
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_alerts", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.string   "facility_type", limit: 255
+    t.string   "facility_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
