@@ -12,12 +12,24 @@ Ctrl = ($scope,$rootScope,User,$http,$state)->
   $rootScope.userOptions = false
   $scope.uiState =
     state: "personal"
+    showAlerts: false
+
+  $scope.train =
+    lrt1: false
+    lrt2: false
+    lrt3: false
+
+  $scope.bus =
+    x: false
+    x: false
+    x: false
 
   $scope.changeState =(state)->
     $scope.uiState.state = state
     if state == 'notifications'
       User.get({id: $rootScope.currentUser.id}).$promise
         .then (data)->
+          $scope.uiState.showAlerts = true
           $scope.alerts = data.alerts
 
   $scope.update =(form)->
