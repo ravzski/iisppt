@@ -1,4 +1,4 @@
-Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
   markerArray = []
   stepDisplay = new google.maps.InfoWindow
@@ -25,11 +25,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
   map = {}
 
   initMap = ->
-    map = new (google.maps.Map)(document.getElementById('map'),
-      zoom: 7
-      center:
-        lat: 14.5800
-        lng: 121.0000)
+    map = Gmap.initMap()
     directionsDisplay.setMap map
     directionsDisplay.setPanel document.getElementById('direction-panel')
     $scope.calculateAndDisplayRoute()
@@ -190,5 +186,5 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating)->
     $state.go("site.result", $scope.query)
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating','Search']
 angular.module('client').controller('ResultCtrl', Ctrl)

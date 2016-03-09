@@ -10,5 +10,12 @@ angular.module('client').factory 'Gmap',
           url: 'https://maps.googleapis.com/maps/api/directions/json'
 
       }
+
+    Gmap.initMap = ->
+      new (google.maps.Map)(document.getElementById('map'),
+        zoom: 7
+        center:
+          lat: 14.5800
+          lng: 121.0000)
     Gmap
   ]

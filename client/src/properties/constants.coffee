@@ -3,6 +3,44 @@
 @DEFAULT_PER_PAGE = 10
 @GMAP_API_KEY = "AIzaSyDl3IaifrpvXFz5UCeE4rqwhWdII-tycsk"
 
+@FACILITY_TYPES = [
+  {
+    label: 'Train'
+    value: 'Train'
+  }
+  {
+    label: 'Bus'
+    value: 'Bus'
+  }
+]
+
+@TRAIN_FACILITIES = [
+  {
+    label: "LRT 1"
+    value: "LRT 1"
+  }
+  {
+    label: "LRT 2"
+    value: "LRT 2"
+  }
+  {
+    label: "MRT 1"
+    value: "MRT 1"
+  }
+]
+
+@BUS_FACILITIES = [
+  {
+    label: "BUS Co. X"
+    value: "BUS Co. X"
+  }
+  {
+    label: "BUS Co. Y"
+    value: "BUS Co. Y"
+  }
+]
+
+
 @INFO_TYPE = [
   {
     label: 'Crime Details'

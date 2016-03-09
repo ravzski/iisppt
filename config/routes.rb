@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :users
     resources :markers
     resources :route_ratings
+    resources :searches
+    resources :alerts
 
     get "/search", to: 'search#index'
 

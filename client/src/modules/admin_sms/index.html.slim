@@ -1,0 +1,79 @@
+.row
+  .col-xs-12
+    .panel
+      .panel-heading
+
+        h4 SMS Alert
+        a.icon-add.pull-left ng-click="toggleForm(null)"
+
+
+      .panel-body.panel-full
+        table.table.table-hover.table-bordered
+          thead.colored
+            tr
+              th Event
+              th Facility Type
+              th Facility Name
+              th Created at
+              th Created by
+          tbody
+            tr ng-if="collection.length == 0"
+              td colspan="6" No Data Available
+            tr ng-repeat="obj in collection"
+              td ng-bind="obj.event"
+              td ng-bind="obj.facility_type"
+              td ng-bind="obj.facility_name"
+              td ng-bind="obj.created_at.formatDate()"
+              td ng-bind="obj.creator_name"
+
+      .panel-footer.compact
+        div(ng-pagination paginate-count="metadata.count" paginate-page="metadata.page" ng-if="uiState.pagination")
+
+
+  .modal.open ng-if="uiState.modal"
+    form  name="form"
+      .modal-dialog
+        .modal-header
+          a.btn-close ng-click="toggleForm(null)" ×
+          h4 SMS Alerts
+
+        .modal-body
+          form name="form"
+
+            .form-group
+              label Notice
+              span.danger *
+              input.form-control(
+                type="text"
+                name="notice"
+                ng-model="alert.event"
+                required=""
+                ng-class="{error: form.notice.$error.required && form.$submitted}")
+
+            .form-group
+              label Facility Type
+              span.danger *
+              select.form-control.toggable-field(
+                ng-model="alert.facility_type"
+                required=""
+                name="facility_type"
+                ng-change="changeFacility()"
+                ng-options="obj.value as obj.label for obj in facility_types"
+                ng-class="{error: form.facility_type.$error.required && form.$submitted}"
+              )
+
+            .form-group
+              label Facility Name
+              span.danger *
+              select.form-control.toggable-field(
+                ng-model="alert.facility_name"
+                required=""
+                name="facility_name"
+                ng-options="obj.value as obj.label for obj in facility_names"
+                ng-class="{error: form.facility_name.$error.required && form.$submitted}"
+              )
+
+        .modal-footer
+          .row
+            .col-md-12
+              a.btn.btn-success ng-click="create(form)" on-change="getResources()"  ng-class="{disabled: uiState.submit}" href="#" Save
