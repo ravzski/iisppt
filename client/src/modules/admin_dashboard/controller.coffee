@@ -21,27 +21,33 @@ citymap =
     population: 603502
 
 
-Ctrl = ($scope,$rootScope,Gmap,$state)->
+Ctrl = ($scope,$rootScope,Gmap,$state,$http)->
   map = {}
   initMap = ->
     map = new (google.maps.Map)(document.getElementById('admin-map'),
-      zoom: 14
+      zoom: 16
       center:
         lat: 14.5800
         lng: 121.0000)
 
-    # $http.get("/api/searches").$promise
-    for city of citymap
-      cityCircle = new (google.maps.Circle)(
-        strokeColor: '#3C4CA5'
-        strokeOpacity: 0.8
-        strokeWeight: 1
-        fillColor: '#3C4CA5'
-        fillOpacity: 0.35
-        map: map
-        center: citymap[city].center
-        radius: 50)
+    $http.get("/api/searches").
+      success (data)->
+        for obj in data
+          cityCircle = new (google.maps.Circle)(
+            strokeColor: getStrokeColor(obj.orientation)
+            strokeOpacity: 0.5
+            fillColor: getFillColor(obj.orientation)
+            fillOpacity: 0.35
+            map: map
+            center: {lat: obj.lat, lng: obj.lng}
+            radius: 50)
+
+  getStrokeColor=(orientation)->
+    if orientation then "#6C87D2" else "#60B97C"
+
+  getFillColor=(orientation)->
+    if orientation then "#7490DE" else "#74DE95"
 
   initMap()
-Ctrl.$inject = ['$scope','$rootScope','Gmap','$state']
+Ctrl.$inject = ['$scope','$rootScope','Gmap','$state','$http']
 angular.module('client').controller('AdminDashboardCtrl', Ctrl)

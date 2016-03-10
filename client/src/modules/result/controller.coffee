@@ -37,6 +37,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       if status == google.maps.DirectionsStatus.OK
         directionsDisplay.setDirections response
         availableRoutes = response.routes
+        $scope.saveSearch(response.routes[0].legs[0])
         $timeout (->
           $scope.buildAvaiableRoutes()
           $scope.extractKeyLocations(0)
@@ -44,6 +45,21 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       else
         $scope.uiState.noRoute = true
         $scope.$apply()
+
+  $scope.saveSearch =(leg)->
+    from =
+      lat: leg.start_location.lat()
+      lng: leg.start_location.lng()
+      place: leg.start_address
+      orientation: true
+
+    to =
+      lat: leg.end_location.lat()
+      lng: leg.end_location.lng()
+      place: leg.end_address
+      orientation: false
+
+    Search.save(from: from, to: to)
 
   $scope.extractKeyLocations =(index)->
     lat = []
