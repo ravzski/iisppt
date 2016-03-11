@@ -1,6 +1,6 @@
 #admin-map
 
-#dashboard-panel.panel
+.panel.dashboard-panel
   .panel-heading
     h4 Top Searches
   .panel-body
@@ -8,12 +8,12 @@
       .col-md-6.border-right
         h5 From
         ul.top-list
-          li ng-repeat="obj in collection.from"
+          li ng-repeat="obj in collection.from | limitTo:10"
             span.count-badge.from ng-bind="obj.total_count"
             span.place-name ng-bind="obj.place"
       .col-md-6
         h5 To
         ul.top-list
           li ng-repeat="obj in collection.to"
-            span.count-badge.to ng-bind="obj.total_count"
+            span.count-badge.to ng-bind="obj.total_count | limitTo:10" 
             span.place-name ng-bind="obj.place"

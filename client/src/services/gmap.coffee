@@ -11,7 +11,7 @@ angular.module('client').factory 'Gmap',
         fillOpacity: .7
         map: this
         center: {lat: obj.lat, lng: obj.lng}
-        radius: Math.sqrt(obj.total_count) * 20)
+        radius: Math.sqrt(obj.total_count) * 50)
 
     google.maps.Map::eventPanel =(obj)->
       events = ""
@@ -47,7 +47,7 @@ angular.module('client').factory 'Gmap',
 
     Gmap.initAdmiMap = ->
       map = new (google.maps.Map)(document.getElementById('admin-map'),
-        zoom: 15
+        zoom: 14
         center:
           lat: 14.5495
           lng: 121.027)
