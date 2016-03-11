@@ -19,10 +19,14 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
     via: ''
     time: $state.params.time || new Date().valueOf()
 
+  $scope.form = {}
+
   availableRoutes = []
   directionsDisplay = new (google.maps.DirectionsRenderer)
   directionsService = new (google.maps.DirectionsService)
   map = {}
+  lats = []
+  lngs = []
 
   initMap = ->
     map = Gmap.initMap()
@@ -32,6 +36,8 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
 
   $scope.calculateAndDisplayRoute = ->
+    return unless $scope.isFormValid()
+
     $scope.uiState.showDirection = false
     directionsService.route directionOptions(), (response, status) ->
       if status == google.maps.DirectionsStatus.OK
@@ -39,7 +45,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
         availableRoutes = response.routes
         $scope.saveSearch(response.routes[0].legs[0])
         $timeout (->
-          $scope.buildAvaiableRoutes()
+          $scope.buildAvaiableRoutes(response.routes)
           $scope.extractKeyLocations(0)
         ), 500
       else
@@ -50,13 +56,13 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
     from =
       lat: leg.start_location.lat()
       lng: leg.start_location.lng()
-      place: leg.start_address
+      place: $scope.query.from
       orientation: true
 
     to =
       lat: leg.end_location.lat()
       lng: leg.end_location.lng()
-      place: leg.end_address
+      place: $scope.query.to
       orientation: false
 
     Search.save(from: from, to: to)
@@ -76,7 +82,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
         $scope.uiState.showDirection = true
         $scope.uiState.noRoute = false
 
-  $scope.buildAvaiableRoutes= ->
+  $scope.buildAvaiableRoutes=(routes)->
     $scope.routes= []
     ratings = null
     Rating.query(from: $scope.query.from, to: $scope.query.to).$promise
@@ -85,6 +91,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
         for obj,i in $('.adp-list ol li')
           count = 0
           sum = 0
+          fare = if !!routes[i].fare then routes[i].fare.value else null
           for r in data
             if r.route_index == i
               sum = r.ratings_sum
@@ -96,6 +103,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
             index: i
             avg: if sum == 0  then 0 else (sum/count)
             count: count
+            fare: if !!fare then "Total Cost: #{fare} PHP" else null
 
           $scope.routes.push temp
 
@@ -103,8 +111,10 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
   $scope.buildEvents =(data)->
     $('.event-panel').remove()
     for obj in data
+      lats = []
+      lngs = []
       element = $("[data-step-index=#{obj.step_index}] td")
-      element.append(buildEventPanel(obj))
+      element.append(Gmap.eventPanel(obj))
 
 
   $scope.changeRoutes =(index)->
@@ -114,6 +124,24 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
     $timeout (->
       $scope.extractKeyLocations(index)
     ), 500
+
+
+  $scope.isFormValid = ->
+    $scope.form.from = if $scope.query.from.trim() == ''  then true else false
+    $scope.form.to = if $scope.query.to.trim() == '' then true else false
+    if $scope.form.from || $scope.form.to
+      $.growl.error {message: MESSAGES.FORM_ERROR}
+      return false
+    if !$scope.query.bus && !$scope.query.rail
+      $.growl.error {message: MESSAGES.INVALID_TRANSIT}
+      return false
+    true
+
+  $scope.search = ->
+    $scope.query.from = $('#origin').val()
+    $scope.query.to = $('#destination').val()
+    return unless $scope.isFormValid()
+    $state.go("site.result", $scope.query)
 
   createMarkers =(obj)->
     marker = new (google.maps.Marker)
@@ -142,50 +170,6 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       stepDisplay.setContent text
       stepDisplay.open map, marker
 
-  buildEventPanel =(obj)->
-    events = ""
-    for event in obj.events
-      events+= buildEvenList(event)
-      image = '/images/crime.png'
-      beachMarker = new (google.maps.Marker)(
-        position:
-          lat: event.lat
-          lng: event.lng
-        map: map
-        icon: image)
-
-    "<div class='event-panel'>
-      <h4 class='title'>
-        <i class='#{buildEventIcon(obj.info_type)}'></i>
-        #{obj.info_type}
-      </h4>
-      <ul class='event-list'>
-        #{events}
-      </ul>
-    </div>"
-
-  buildEventIcon =(event)->
-    switch event
-      when "Crime Details"
-        "icon-crime"
-      when "Traffic Incident"
-        "icon-traffic"
-      else
-        "icon-inst"
-
-  buildEvenList =(event)->
-    " <li>
-      <div class='event-place'>
-        #{event.place}
-      </div>
-      <div class='event-desc'>
-        #{event.description}
-      </div>
-      <div class='event-date'>
-        #{event.created_at.formatTimestamp()}
-      </div>
-    </li>"
-
   getModes = ->
     modes = []
     modes.push "BUS" if $scope.query.bus
@@ -195,11 +179,6 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
   initMap()
 
-  $scope.search = ->
-    $scope.query.from = $('#origin').val()
-    $scope.query.to = $('#destination').val()
-    $scope.query.via = $('#via').val()
-    $state.go("site.result", $scope.query)
 
 
 Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating','Search']

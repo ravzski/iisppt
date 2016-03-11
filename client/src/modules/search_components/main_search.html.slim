@@ -6,6 +6,7 @@
       ng-model="query.from"
       required=""
       gmap-autocomplete=""
+      ng-class="{'error': form.from}"
       )
 
 
@@ -17,6 +18,7 @@
       required=""
       ng-enter="search()"
       gmap-autocomplete=""
+      ng-class="{'error': form.to}"
       )
 
   .form-group.floating-label

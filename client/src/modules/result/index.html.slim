@@ -13,6 +13,7 @@
       ul
         li ng-repeat="obj in routes" ng-click="changeRoutes(obj.index)" ng-class="{'current': currentIndex == $index}"
           .route-summary ng-bind-html="obj.template"
+          span.total-fare ng-bind="obj.fare" ng-if="!!obj.fare"
           ul route-rating="" avg="obj.avg" count="obj.count"
 
 #secondary-panel ng-show="!uiState.noRoute && uiState.showDirection"

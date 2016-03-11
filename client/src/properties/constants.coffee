@@ -132,6 +132,7 @@
   PASSWORD_NOT_MATCH: "Password did not match"
   INVALID_EMAIL: "Invalid Email"
   MUST_BE_LOGGED_IN: "You must login to rate"
+  INVALID_TRANSIT: "You must choose at least one type of transport"
 
 @DELETE_WARNING = {
     title: 'Are you sure?'

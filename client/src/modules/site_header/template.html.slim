@@ -1,27 +1,28 @@
 .site-header ng-class="headerClass"
-  ul
-    li
-      a href="/" Home
-    li
-      a href="#" Fares & public transport
-    li
-      a href="#" About
-    li
-      a href="#" Contact
+  .site-header-container
+    ul
+      li
+        a href="/" Home
+      li
+        a href="#" Fares & public transport
+      li
+        a href="#" About
+      li
+        a href="#" Contact
 
-    li.pull-right ng-if="!currentUser"
-      a href="#" ng-click="toggleModal('login')" Login
-    li.pull-right ng-if="!currentUser"
-      a href="#" ng-click="toggleModal('register')"  Register
+      li.pull-right ng-if="!currentUser"
+        a href="#" ng-click="toggleModal('login')" Login
+      li.pull-right ng-if="!currentUser"
+        a href="#" ng-click="toggleModal('register')"  Register
 
-    li.pull-right ng-if="!!currentUser"
-      a href="#" ng-click="toggleSubMenu()"
-        span ng-bind="currentUser.first_name"
-        i.icon-down
-      ul.user-options ng-show="userOptions"
-        li
-          a href="/profile" Profile
-        li
-          a href="/admin" ng-if="currentUser.admin" Admin
-        li
-          a ng-click="logout()" Logout
+      li.pull-right ng-if="!!currentUser"
+        a href="#" ng-click="toggleSubMenu()"
+          span ng-bind="currentUser.first_name"
+          i.icon-down
+        ul.user-options ng-show="userOptions"
+          li
+            a href="/profile" Profile
+          li
+            a href="/admin" ng-if="currentUser.admin" Admin
+          li
+            a ng-click="logout()" Logout

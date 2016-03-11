@@ -1,17 +1,11 @@
 class Api::SearchesController < ApiController
 
   def index
-    render json: Search.complete_details
+    render json: SearchProcessor::Builder.new.build
   end
 
   def create
-    # @obj = Search.new obj_params.merge(user_id: current_user.id)
-    searches = []
-    searches.push Search.new(from_params)
-    searches.push Search.new(to_params)
-    searches[0].user_id = current_user.id if current_user.present?
-    searches[1].user_id = current_user.id if current_user.present?
-    Search.import searches
+    SearchProcessor::Builder.new.create(from_params,to_params,current_user)
     render_empty_success
   end
 

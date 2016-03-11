@@ -1,6 +1,7 @@
 module Gmap
   class MetaData < Base
 
+
     def build
       result= {collection: [], rating: nil}
       collection = []
@@ -8,9 +9,13 @@ module Gmap
 
       @lng.each_with_index do |lng,index|
         lat = @lat[index]
+        @lat_offset = 0
+        @lng_offset =  0
         markers = Marker.search_by_location(lat, lng, existing_ids).group_by(&:info_type).each do |info_type,markers|
           temp = {info_type: info_type, events: [], step_index: index}
           markers.each do |obj|
+            @lat_offset += 0.0001
+            @lng_offset += 0.0001
             existing_ids.push obj.id
             temp[:events].push metadata_details(obj)
           end
@@ -43,8 +48,8 @@ module Gmap
         agency: obj.agency,
         description: obj.description,
         created_at: obj.created_at,
-        lat: obj.lat,
-        lng: obj.lng
+        lat: obj.lat+@lat_offset,
+        lng: obj.lng+@lng_offset
       }
     end
 

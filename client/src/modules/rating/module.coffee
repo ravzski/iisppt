@@ -17,7 +17,8 @@ module.directive "routeRating", ->
   scope:
     avg: "="
     count: "="
-
+    fare: "="
+    
   link: ($scope, element, attrs) ->
     $scope.max_rating = 5
     if $scope.avg == 0
@@ -25,8 +26,11 @@ module.directive "routeRating", ->
     else
       $scope.whole_no = Math.round($scope.avg)
     $scope.floating = $scope.avg%$scope.whole_no
+
     $scope.totalText = ->
-      "out of #{$scope.count}"
+      label = if $scope.count == 1 then "User" else "Users"
+      "#{$scope.count} #{label} Rated"
+
     $scope.getClass =(n)->
       if n == $scope.whole_no && $scope.floating > 0
         "icon-star-half"

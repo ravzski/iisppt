@@ -11,8 +11,7 @@
       background-color: rgba(0,0,0,.5)
   ul
     list-style: none
-    width: 60%
-    margin: 0 auto
+    margin: 0px
     li
       display: inline-block
       margin-right: 15px
@@ -43,3 +42,9 @@
     a
       font-size: 10px
       padding: 10px
+
+.site-header-container
+  width: 60%
+  margin: 0 auto
+  +respond-to(0,1010px)
+    width: 100%

@@ -13,6 +13,8 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
     bus: true
     rail: true
 
+  $scope.form = {}
+
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
     timeout = if !$scope.showOptions then 300 else 0
@@ -23,6 +25,18 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
   $scope.search = ->
     $scope.query.from = $('#origin').val()
     $scope.query.to = $('#destination').val()
+
+    $scope.form.from = if $scope.query.from.trim() == ''  then true else false
+    $scope.form.to = if $scope.query.to.trim() == '' then true else false
+
+    if $scope.form.from || $scope.form.to
+      $.growl.error {message: MESSAGES.FORM_ERROR}
+      return
+
+    if !$scope.query.bus && !$scope.query.rail
+      $scope.toggleMoreOptions() unless $scope.expanded 
+      $.growl.error {message: MESSAGES.INVALID_TRANSIT}
+      return
 
     $state.go("site.result", $scope.query)
 
