@@ -16,11 +16,11 @@ angular.module('client').factory 'Gmap',
     google.maps.Map::eventPanel =(obj)->
       events = ""
       for event in obj.events
-        events+= @buildEvenList(event)
-        @appendMarker(event,this)
+        events+= Gmap.buildEvenList(event)
+        this.appendMarker(event)
       "<div class='event-panel'>
         <h4 class='title'>
-          <i class='#{@buildEventIcon(obj.info_type)}'></i>
+          <i class='#{Gmap.buildEventIcon(obj.info_type)}'></i>
           #{obj.info_type}
         </h4>
         <ul class='event-list'>
@@ -28,6 +28,14 @@ angular.module('client').factory 'Gmap',
         </ul>
       </div>"
 
+    google.maps.Map::appendMarker=(event)->
+      image = new (google.maps.MarkerImage)("/images/#{Gmap.markerIcon(event.info_type)}", null, null, null, new (google.maps.Size)(22, 30))
+      new (google.maps.Marker)(
+        position:
+          lat: event.lat
+          lng: event.lng
+        map: this
+        icon: image)
 
     Gmap = $resource "https://maps.googleapis.com", {key: GMAP_API_KEY},
       {
@@ -58,15 +66,6 @@ angular.module('client').factory 'Gmap',
 
     Gmap.getFillColor=(orientation)->
       if orientation then "#2dcb73" else "#337ab7"
-
-    Gmap.appendMarker=(event,map)->
-      image = new (google.maps.MarkerImage)("/images/#{@markerIcon(event.info_type)}", null, null, null, new (google.maps.Size)(22, 30))
-      new (google.maps.Marker)(
-        position:
-          lat: event.lat
-          lng: event.lng
-        map: map
-        icon: image)
 
 
     Gmap.markerIcon =(event)->

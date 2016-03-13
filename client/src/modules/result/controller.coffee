@@ -114,7 +114,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       lats = []
       lngs = []
       element = $("[data-step-index=#{obj.step_index}] td")
-      element.append(Gmap.eventPanel(obj))
+      element.append(map.eventPanel(obj))
 
 
   $scope.changeRoutes =(index)->
