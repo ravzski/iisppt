@@ -9,6 +9,7 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap)->
     page: 1
     modal: false
     searched: false
+    legModal: false
 
   $scope.query =
     from: $state.params.from || ""
@@ -20,6 +21,8 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap)->
 
   $scope.form = {}
   $scope.legs = []
+
+  currentEvent = {}
   map = {}
   poly = new (google.maps.Polyline)(
     strokeColor: '#000000'
@@ -59,12 +62,20 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap)->
     marker.setPosition start_location
 
   addLatLng = (event) ->
-    path.push event.latLng
+    currentEvent = event
+    $scope.new_leg = {}
+    $scope.uiState.legModal = true
+    $scope.$apply()
+
+  $scope.createLeg =(form)->
+    path.push currentEvent.latLng
+    $scope.uiState.legModal = false
     unless path.length == 1
       marker = new (google.maps.Marker)(
-        position: event.latLng
+        position: currentEvent.latLng
         title: '#' + path.getLength()
         map: map)
+
 
   $scope.search = ->
     $scope.query.from = $('#origin').val()

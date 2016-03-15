@@ -55,3 +55,42 @@
     table.table
       tr
         th From
+
+
+
+
+.modal.open ng-if="uiState.legModal"
+  form  name="form"
+    .modal-dialog
+      .modal-header
+        a.btn-close ng-click="toggleForm(null)" ×
+        h4 Leg Details
+
+      .modal-body
+        form name="form"
+
+          .row
+            .col-md-6
+              .form-group
+                label Transporation Method
+                select.form-control.toggable-field(
+                  ng-model="new_leg.transporation"
+                  required=""
+                  name="transporation"
+                  ng-options="obj.value as obj.label for obj in facility_types"
+                )
+            .col-md-6
+              .form-group
+                label Fare
+                input.form-control ng-model="new_leg.fare"
+
+          .row
+            .col-md-12
+              .form-group
+                label Details
+                input.form-control ng-model="new_leg.details"
+
+      .modal-footer
+        .row
+          .col-md-12
+            a.btn.btn-success ng-click="createLeg(form)" ng-class="{disabled: uiState.submit}" href="#" Save
