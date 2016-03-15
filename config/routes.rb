@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :searches
     resources :alerts
     resources :user_alerts
+    resources :directions
     get "/search", to: 'search#index'
 
   end

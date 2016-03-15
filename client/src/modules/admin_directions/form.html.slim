@@ -1,0 +1,41 @@
+#admin-map
+
+.panel.dashboard-panel
+  .panel-heading
+    h4 Custom Routes
+  .panel-body
+    .form-group
+      label From
+      input.form-control#origin(
+        placeholder="Address, Station Etc."
+        ng-model="query.from"
+        required=""
+        gmap-autocomplete=""
+        ng-class="{'error': form.from}"
+        )
+
+
+    .form-group.floating-label
+      label To
+      input.form-control#destination(
+        placeholder="Address, Station Etc."
+        ng-model="query.to"
+        required=""
+        ng-enter="search()"
+        gmap-autocomplete=""
+        ng-class="{'error': form.to}"
+        )
+
+
+  .panel-footer
+    .row
+      .col-md-12
+        .btn-group.pull-right
+          a.btn.btn-primary.no-border href="/admin/directions" Back
+          a.btn.btn-success ng-click="search()" Search
+
+
+.panel.dashboard-panel.legs-panel
+  .panel-heading
+    h4 Legs
+  
