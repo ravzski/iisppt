@@ -12,3 +12,16 @@ module.directive 'gmapAutocomplete', ->
       google.maps.event.addListener autocomplete, 'place_changed', ->
         $('#lat').val this.getPlace().geometry.location.lat()
         $('#lng').val this.getPlace().geometry.location.lng()
+
+    if !!attrs.gmapCords && attrs.cordsId == "from"
+      google.maps.event.addListener autocomplete, 'place_changed', ->
+        $('#from_lat').val this.getPlace().geometry.location.lat()
+        $('#from_lng').val this.getPlace().geometry.location.lng()
+
+
+    if !!attrs.gmapCords && attrs.cordsId == "to"
+      google.maps.event.addListener autocomplete, 'place_changed', ->
+        $('#to_lat').val this.getPlace().geometry.location.lat()
+        $('#to_lng').val this.getPlace().geometry.location.lng()
+
+    return

@@ -1,0 +1,38 @@
+form name="newLeg"
+  .row
+    .col-md-6
+      .form-group
+        label From
+        input.form-control#leg_origin(
+          placeholder="Address, Station Etc."
+          ng-model="new_leg.from"
+          required=""
+          gmap-autocomplete=""
+          ng-class="{'error': newLeg.from}"
+          )
+
+    .col-md-6
+      .form-group.floating-label
+        label To
+        input.form-control#leg_destination(
+          placeholder="Address, Station Etc."
+          ng-model="new_leg.to"
+          required=""
+          gmap-autocomplete=""
+          ng-class="{'error': newLeg.to}"
+          )
+
+  .row
+    .col-md-6
+      .form-group
+        label Transporation Method
+        select.form-control.toggable-field(
+          ng-model="new_leg.transporation"
+          required=""
+          name="transporation"
+          ng-options="obj.value as obj.label for obj in facility_types"
+        )
+    .col-md-6
+      .form-group
+        label Fare
+        input.form-control ng-model="new_leg.fare"

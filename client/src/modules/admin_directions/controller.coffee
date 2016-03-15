@@ -19,6 +19,12 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction)->
     swal DELETE_WARNING, ->
       destroy(obj)
 
+  destroy =(obj) ->
+    Direction.remove({id: obj.id}).$promise
+      .then (data) ->
+        $.growl.notice {message: MESSAGES.DELETE_SUCCESS}
+        $scope.collection.splice($scope.collection.indexOf(obj),1)
+
 
 Ctrl.$inject = ['$scope','$state','$timeout','$rootScope','Direction']
 angular.module('client').controller('AdminDirectionsCtrl', Ctrl)

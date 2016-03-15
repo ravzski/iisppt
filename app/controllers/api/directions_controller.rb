@@ -1,10 +1,10 @@
 class Api::DirectionsController < ApiController
 
   before_action :validate_admin, only: :create
-  before_action :find_obj, except: [:index]
+  before_action :find_obj, except: [:index, :create]
 
   def index
-    @collection = Marker.complete_details.search(query_params).page(current_page)
+    @collection = Direction.search(query_params).page(current_page)
     render_collection
   end
 
@@ -13,12 +13,9 @@ class Api::DirectionsController < ApiController
   end
 
   def create
-    @obj = Marker.new obj_params.merge(creator_id: current_user.id, updator_id: current_user.id)
-    if @obj.save
-      render json: @obj
-    else
-      render_obj_errors
-    end
+    @obj = Direction.filter_by_query(params[:direction]).first_or_create
+    @obj.set_cords(params[:direction])
+    render json: @obj
   end
 
   def update
@@ -54,7 +51,7 @@ class Api::DirectionsController < ApiController
   end
 
   def find_obj
-    @obj = Direction.where(from: params[:from], to: params[:to]).first_or_create
+    @obj = Direction.find(params[:id])
   end
 
 end

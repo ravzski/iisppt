@@ -17,7 +17,7 @@ angular.module('client').config [
 
     $stateProvider
       .state 'admin.directions.form',
-        url: '/form',
+        url: '/form?from&to&from_lat&from_lng&to_lat&to_lng',
         controller: 'AdminDirectionsFormCtrl'
         templateUrl: 'modules/admin_directions/form.html'
 

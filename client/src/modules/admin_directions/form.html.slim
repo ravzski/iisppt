@@ -1,30 +1,41 @@
 #admin-map
 
+
+
 .panel.dashboard-panel
   .panel-heading
     h4 Custom Routes
   .panel-body
-    .form-group
-      label From
-      input.form-control#origin(
-        placeholder="Address, Station Etc."
-        ng-model="query.from"
-        required=""
-        gmap-autocomplete=""
-        ng-class="{'error': form.from}"
-        )
+    input#from_lat.hidden ng-model="query.from_lat"
+    input#from_lng.hidden ng-model="query.from_lng"
+    input#to_lat.hidden ng-model="query.to_lat"
+    input#to_lng.hidden ng-model="query.to_lng"
+    .row
+      .col-md-6
+        .form-group
+          label From
+          input.form-control#origin(
+            placeholder="Address, Station Etc."
+            ng-model="query.from"
+            gmap-cords="true"
+            cords-id="from"
+            required=""
+            gmap-autocomplete=""
+            ng-class="{'error': form.from}"
+            )
 
-
-    .form-group.floating-label
-      label To
-      input.form-control#destination(
-        placeholder="Address, Station Etc."
-        ng-model="query.to"
-        required=""
-        ng-enter="search()"
-        gmap-autocomplete=""
-        ng-class="{'error': form.to}"
-        )
+      .col-md-6
+        .form-group.floating-label
+          label To
+          input.form-control#destination(
+            placeholder="Address, Station Etc."
+            ng-model="query.to"
+            required=""
+            cords-id="to"
+            gmap-cords="true"
+            gmap-autocomplete=""
+            ng-class="{'error': form.to}"
+            )
 
 
   .panel-footer
@@ -35,7 +46,12 @@
           a.btn.btn-success ng-click="search()" Search
 
 
-.panel.dashboard-panel.legs-panel
+
+
+.panel.dashboard-panel.legs-panel ng-show="uiState.searched"
   .panel-heading
     h4 Legs
-  
+  .panel-body
+    table.table
+      tr
+        th From

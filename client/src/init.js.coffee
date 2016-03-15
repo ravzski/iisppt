@@ -19,6 +19,7 @@ angular.module(
     'AdminSidebar',
     'ActiveSelect',
     'AdminMarker',
+    'AdminDirections',
     'Rating',
     'Profile'
   ]
