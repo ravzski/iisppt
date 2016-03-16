@@ -1,0 +1,25 @@
+.custom-route
+  table#adp-placemark.adp-placemark
+    tbody
+      tr
+        td
+          img.adp-marker jstcache="56" src="https://mts.googleapis.com/maps/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&text=A&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1"
+        td.adp-text jsan="7.adp-text" jstcache="57" ng-bind="query.from"
+
+  ul.custom-leg
+    li ng-repeat="obj in custom_legs"
+      span ng-bind="obj.place"
+      .details-pan
+        img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/bus.png" ng-if="obj.transporation == 'Bus'"
+        img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/tram.png" ng-if="obj.transporation == 'Train'"
+        img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/walk.png" ng-if="obj.transporation == 'Walk'"
+        span ng-bind="obj.instructions"
+      span.duration ng-bind="legLabel(obj)"
+
+
+  table.adp-placemark
+    tbody
+      tr
+        td
+          img.adp-marker jstcache="83" src="https://mts.googleapis.com/maps/vt/icon/name=icons/spotlight/spotlight-waypoint-b.png&text=B&psize=16&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1"
+        td.adp-text jsan="7.adp-text" jstcache="84"  ng-bind="query.to"

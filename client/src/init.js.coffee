@@ -21,6 +21,7 @@ angular.module(
     'AdminMarker',
     'AdminDirections',
     'Rating',
-    'Profile'
+    'Profile',
+    'CustomRoute'
   ]
 )

@@ -1,4 +1,4 @@
-Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
+Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search,Direction)->
 
   markerArray = []
   stepDisplay = new google.maps.InfoWindow
@@ -8,6 +8,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
     noRoute: false
     showRating: false
     showDirection: false
+    customRoute: false
 
   $scope.routes = null
   $scope.query =
@@ -74,11 +75,16 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       lat.push obj.start_location.lat()
       lng.push obj.start_location.lng()
       createMarkers(obj)
+    $scope.custom_routes = []
 
     $http.get("/api/search",{params: "lat[]": lat, "lng[]": lng, from: $scope.query.from, to: $scope.query.to, route_index: $scope.currentIndex}).
       success (data)->
-        $scope.buildEvents(data.collection)
-        $scope.currentRating = data.rating
+        for obj in data.custom_data
+          obj.avg = obj.sum_ratings/obj.total_rating
+          obj.transporations = if !!obj.transporations then  obj.transporations.split(",") else []
+          $scope.custom_routes.push obj
+        $scope.buildEvents(data.gmap_data.collection)
+        $scope.currentRating = data.gmap_data.rating
         $scope.uiState.showDirection = true
         $scope.uiState.noRoute = false
 
@@ -87,7 +93,6 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
     ratings = null
     Rating.query(from: $scope.query.from, to: $scope.query.to).$promise
       .then (data) ->
-
         for obj,i in $('.adp-list ol li')
           count = 0
           sum = 0
@@ -107,6 +112,8 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
           $scope.routes.push temp
 
+  $scope.hasTransporation =(transporations,ref)->
+    if transporations.indexOf(ref) == -1 then false else true
 
   $scope.buildEvents =(data)->
     $('.event-panel').remove()
@@ -119,12 +126,19 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
   $scope.changeRoutes =(index)->
     $scope.uiState.showDirection = false
+    $scope.uiState.customRoute = false
     $scope.currentIndex = index
     $("[data-route-index=#{index}]").click()
     $timeout (->
       $scope.extractKeyLocations(index)
     ), 500
 
+
+  $scope.legLabel =(obj)->
+    label = []
+    label.push "Fare: #{obj.fare.toFixed(2)} PHP" if obj.fare !=0
+    label.push "Duration: #{obj.duration} mins" if obj.duration !=0
+    label.join(" | ")
 
   $scope.isFormValid = ->
     $scope.form.from = if $scope.query.from.trim() == ''  then true else false
@@ -136,6 +150,20 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       $.growl.error {message: MESSAGES.INVALID_TRANSIT}
       return false
     true
+
+  $scope.currentTimeLabel =(duration)->
+    end = moment(this.query.time, ["h:mm A"]).add(duration, 'minutes')
+    "#{this.query.time}–#{end.format('hh:mm A')}"
+
+  $scope.totalDurationLabel=(duration)->
+    "#{duration} mins"
+
+  $scope.showCustomRoute =(id)->
+    $scope.currentIndex = id
+    $scope.uiState.customRoute = true
+    Direction.get({id: id, complete: true}).$promise
+      .then (data) ->
+        $scope.custom_legs = data.legs
 
   $scope.search = ->
     $scope.query.from = $('#origin').val()
@@ -180,5 +208,5 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
 
 
 
-Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating','Search']
+Ctrl.$inject = ['$scope','$state','Gmap','$http','$rootScope','$timeout','$sce','Rating','Search','Direction']
 angular.module('client').controller('ResultCtrl', Ctrl)

@@ -9,7 +9,11 @@ class Api::DirectionsController < ApiController
   end
 
   def show
-    render json: {id: @obj.id, legs: @obj.legs}
+    if params[:complete].present?
+      render json:  CustomRoutes::Builder.new(@obj.id).build
+    else
+      render json: {id: @obj.id, legs: @obj.legs}
+    end
   end
 
   def create

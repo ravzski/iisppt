@@ -11,10 +11,21 @@
     .available-routes
       h4 Suggested Routes:
       ul
-        li ng-repeat="obj in routes" ng-click="changeRoutes(obj.index)" ng-class="{'current': currentIndex == $index}"
+        li ng-repeat="obj in routes" ng-click="changeRoutes(obj.index)" ng-class="{'current': currentIndex == $index && !uiState.customRoute}"
           .route-summary ng-bind-html="obj.template"
           span.total-fare ng-bind="obj.fare" ng-if="!!obj.fare"
           ul route-rating="" avg="obj.avg" count="obj.count"
+
+        li ng-repeat="obj in custom_routes" ng-click="showCustomRoute(obj.id)" ng-class="{'current': currentIndex == obj.id && uiState.customRoute}"
+          span ng-repeat="tran in obj.transporations"
+            img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/bus.png" ng-if="tran == 'Bus'"
+            img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/tram.png" ng-if="tran == 'Train'"
+            img.mright-5 src="https://maps.gstatic.com/mapfiles/transit/iw2/6/walk.png" ng-if="tran == 'Walk'"
+          br
+          span.sum-duration ng-bind="totalDurationLabel(obj.sum_duration)"
+          span ng-bind="currentTimeLabel(obj.sum_duration)"
+          span.total-fare ng-bind="obj.fare" ng-if="!!obj.fare"
+          ul route-rating="" avg="obj.sum_ratings" count="obj.total_rating"
 
 #secondary-panel ng-show="!uiState.noRoute && uiState.showDirection"
   .rating-container
@@ -22,8 +33,8 @@
     ul route-rating-action="" rating="currentRating" from="query.from" to="query.to" index="currentIndex"
 
 
-
-  #direction-panel
+  div custom-route="" ng-if="uiState.customRoute"
+  #direction-panel ng-show="!uiState.customRoute"
 
 #map ng-show="!uiState.noRoute"
 .no-route-container ng-show="uiState.noRoute"

@@ -20,3 +20,12 @@
       gmap-autocomplete=""
       ng-class="{'error': form.to}"
       )
+
+
+  .form-group.floating-label
+    label Date/Time
+    .row
+      .col-md-9
+        input.form-control.date-picker date-picker=""  ng-model="query.departure_time" required=""
+      .col-md-3.time-picker-group
+        input.form-control timepicker="" ng-model="query.time" required="" placeholder="Time"

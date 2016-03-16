@@ -1,7 +1,6 @@
 module SearchProcessor
   class Builder
 
-
     def build
       collection = {from: [], to: []}
       Search.complete_details.group_by(&:orientation).each do |orientation,col|
