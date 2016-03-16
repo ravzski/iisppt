@@ -79,6 +79,13 @@
                 input.form-control ng-model="new_leg.place"
 
           .row
+            .col-md-12
+              .form-group
+                label Instructions
+                input.form-control ng-model="new_leg.instructions"
+
+
+          .row
             .col-md-6
               .form-group
                 label Transporation Method
@@ -93,15 +100,10 @@
                 label Fare
                 input.form-control ng-model="new_leg.fare"
 
-          .row
-            .col-md-12
-              .form-group
-                label Instructions
-                input.form-control ng-model="new_leg.instructions"
-
       .modal-footer
         .row
           .col-md-12
             .btn-group
               a.btn.btn-danger ng-click="deleteLeg()"  ng-class="{disabled: !new_leg.id}" href="#" Delete
+              a.btn.btn-primary ng-click="endLeg()" ng-class="{disabled: uiState.submit}" href="#" Mark as end
               a.btn.btn-success ng-click="saveLeg()" ng-class="{disabled: uiState.submit}" href="#" Save

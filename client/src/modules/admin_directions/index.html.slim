@@ -19,7 +19,7 @@
               td ng-bind="obj.from"
               td ng-bind="obj.to"
               td.action-cell-sm
-                a.edit-btn href="#" ng-href="/admin/directions/from?from={{obj.from}}&to={{obj.to}}" data-position="left"
+                a.edit-btn href="#" ng-click="showObj(obj)" data-position="left"
                   i.icon-edit
                 a.delete-btn href="#" ng-click="submitDestroy(obj)" data-position="left"
                   i.icon-delete

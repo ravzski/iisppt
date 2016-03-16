@@ -19,6 +19,9 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction)->
     swal DELETE_WARNING, ->
       destroy(obj)
 
+  $scope.showObj =(obj)->
+    $state.go("admin.directions.form", obj)
+
   destroy =(obj) ->
     Direction.remove({id: obj.id}).$promise
       .then (data) ->

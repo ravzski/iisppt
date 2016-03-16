@@ -78,6 +78,7 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap,Leg)->
       showMarkerDetails(this)
 
   showMarkerDetails =(marker)->
+    return if marker.title == '#origin'
     currentIndex = marker.title.split("#")[1]
     $scope.new_leg = angular.copy $scope.legs[currentIndex]
     $scope.uiState.legModal = true
@@ -92,6 +93,12 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap,Leg)->
       lng: event.latLng.lng()
     $scope.uiState.legModal = true
     $scope.$apply()
+
+  $scope.endLeg = ->
+    $scope.new_leg.lat = $scope.query.to_lat
+    $scope.new_leg.lng = $scope.query.to_lng
+    currentEvent.latLng = new google.maps.LatLng($scope.query.to_lat, $scope.query.to_lng)
+    $scope.createLeg()
 
   $scope.saveLeg =->
     if !!$scope.new_leg.id
