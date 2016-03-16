@@ -17,7 +17,6 @@ class CreateDirections < ActiveRecord::Migration
       t.integer :direction_id
       t.string :place
       t.string :transporation
-      t.string :instructions
       t.decimal :fare
       t.float :lat
       t.float :lng
