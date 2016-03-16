@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313171211) do
+ActiveRecord::Schema.define(version: 20160316013207) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "place",         limit: 255
@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20160313171211) do
     t.integer "direction_id",  limit: 4
     t.string  "place",         limit: 255
     t.string  "transporation", limit: 255
-    t.string  "instructions",  limit: 255
     t.decimal "fare",                      precision: 10
     t.float   "lat",           limit: 24
     t.float   "lng",           limit: 24
+    t.string  "instructions",  limit: 255
   end
 
   create_table "markers", force: :cascade do |t|

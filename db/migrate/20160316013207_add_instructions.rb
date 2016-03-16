@@ -1,5 +1,5 @@
 class AddInstructions < ActiveRecord::Migration
   def change
-    add_column :directions, :instructions, :string
+    add_column :legs, :instructions, :string
   end
 end
