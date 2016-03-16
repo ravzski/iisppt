@@ -10,32 +10,31 @@
     input#from_lng.hidden ng-model="query.from_lng"
     input#to_lat.hidden ng-model="query.to_lat"
     input#to_lng.hidden ng-model="query.to_lng"
-    .row
-      .col-md-6
-        .form-group
-          label From
-          input.form-control#origin(
-            placeholder="Address, Station Etc."
-            ng-model="query.from"
-            gmap-cords="true"
-            cords-id="from"
-            required=""
-            gmap-autocomplete=""
-            ng-class="{'error': form.from}"
-            )
 
-      .col-md-6
-        .form-group.floating-label
-          label To
-          input.form-control#destination(
-            placeholder="Address, Station Etc."
-            ng-model="query.to"
-            required=""
-            cords-id="to"
-            gmap-cords="true"
-            gmap-autocomplete=""
-            ng-class="{'error': form.to}"
-            )
+    .form-group
+      label From
+      input.form-control#origin(
+        placeholder="Address, Station Etc."
+        ng-model="query.from"
+        gmap-cords="true"
+        cords-id="from"
+        required=""
+        gmap-autocomplete=""
+        ng-class="{'error': form.from}"
+        )
+
+
+    .form-group.floating-label
+      label To
+      input.form-control#destination(
+        placeholder="Address, Station Etc."
+        ng-model="query.to"
+        required=""
+        cords-id="to"
+        gmap-cords="true"
+        gmap-autocomplete=""
+        ng-class="{'error': form.to}"
+        )
 
 
   .panel-footer
@@ -52,9 +51,13 @@
   .panel-heading
     h4 Legs
   .panel-body
-    table.table
-      tr
-        th From
+    ul.legs-list
+      li ng-repeat="obj in legs"
+        span.place ng-bind="obj.place"
+        .details
+          span ng-bind="legLabel(obj)"
+          br
+          span ng-bind="obj.instructions"
 
 
 
@@ -63,11 +66,17 @@
   form  name="form"
     .modal-dialog
       .modal-header
-        a.btn-close ng-click="toggleForm(null)" ×
+        a.btn-close ng-click="uiState.legModal = false" ×
         h4 Leg Details
 
       .modal-body
         form name="form"
+
+          .row
+            .col-md-12
+              .form-group
+                label Place
+                input.form-control ng-model="new_leg.place"
 
           .row
             .col-md-6
@@ -87,10 +96,12 @@
           .row
             .col-md-12
               .form-group
-                label Details
-                input.form-control ng-model="new_leg.details"
+                label Instructions
+                input.form-control ng-model="new_leg.instructions"
 
       .modal-footer
         .row
           .col-md-12
-            a.btn.btn-success ng-click="createLeg(form)" ng-class="{disabled: uiState.submit}" href="#" Save
+            .btn-group
+              a.btn.btn-danger ng-click="deleteLeg()"  ng-class="{disabled: !new_leg.id}" href="#" Delete
+              a.btn.btn-success ng-click="saveLeg()" ng-class="{disabled: uiState.submit}" href="#" Save

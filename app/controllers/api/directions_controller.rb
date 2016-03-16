@@ -9,13 +9,13 @@ class Api::DirectionsController < ApiController
   end
 
   def show
-    render json: {legs: @obj.legs}
+    render json: {id: @obj.id, legs: @obj.legs}
   end
 
   def create
     @obj = Direction.filter_by_query(params[:direction]).first_or_create
     @obj.set_cords(params[:direction])
-    render json: @obj
+    render json: {id: @obj.id, legs: @obj.legs}
   end
 
   def update
