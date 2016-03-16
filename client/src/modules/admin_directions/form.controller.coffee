@@ -27,7 +27,7 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap,Leg)->
   markers = []
   currentIndex = 0
   poly = new (google.maps.Polyline)(
-    strokeColor: '#000000'
+    strokeColor: '#579DE3'
     strokeOpacity: 1.0
     strokeWeight: 3)
   path = poly.getPath()
@@ -51,7 +51,6 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap,Leg)->
           $scope.legs = data.legs
           $scope.uiState.searched = true
 
-    calculateAndDisplayRoute()
     poly.setMap map
     # Add a listener for the click event
     map.addListener 'click', addLatLng
@@ -163,22 +162,8 @@ Ctrl = ($scope,$state,$timeout,$rootScope,Direction,Gmap,Leg)->
     temp
 
   $scope.legLabel =(obj)->
-    "#{obj.transporation} | Fare: #{obj.fare}"
+    "#{obj.transporation} | Fare: #{obj.fare} | Duration: #{obj.duration}"
 
-  getModes = ->
-    modes = []
-    modes.push "BUS" if $scope.query.bus
-    modes.push "RAIL" if $scope.query.rail
-    modes
-
-
-  calculateAndDisplayRoute = ->
-    directionsService.route {
-      origin: "St. Luke's Medical Center, Taguig"
-      destination: "Robinsons Pioneer Complex, Pioneer Street, Mandaluyong, NCR, Philippines"
-      travelMode: google.maps.TravelMode.DRIVING
-    }, (response, status) ->
-      directionsDisplay.setDirections response
 
 
   initMap()

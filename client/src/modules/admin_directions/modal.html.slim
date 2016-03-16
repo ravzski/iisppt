@@ -1,0 +1,48 @@
+.modal.open ng-if="uiState.legModal"
+  form  name="form"
+    .modal-dialog
+      .modal-header
+        a.btn-close ng-click="uiState.legModal = false" ×
+        h4 Leg Details
+
+      .modal-body
+        form name="form"
+
+          .row
+            .col-md-12
+              .form-group
+                label Place
+                input.form-control ng-model="new_leg.place"
+
+          .row
+            .col-md-12
+              .form-group
+                label Instructions
+                input.form-control ng-model="new_leg.instructions"
+
+
+          .row
+            .col-md-4
+              .form-group
+                label Transporation Method
+                select.form-control.toggable-field(
+                  ng-model="new_leg.transporation"
+                  required=""
+                  name="transporation"
+                  ng-options="obj.value as obj.label for obj in facility_types"
+                )
+            .col-md-4
+              .form-group
+                label Fare
+                input.form-control ng-model="new_leg.fare"
+            .col-md-4
+              .form-group
+                label Duratuin (minutes)
+                input.form-control ng-model="new_leg.duration"
+      .modal-footer
+        .row
+          .col-md-12
+            .btn-group
+              a.btn.btn-danger ng-click="deleteLeg()"  ng-class="{disabled: !new_leg.id}" href="#" Delete
+              a.btn.btn-primary ng-click="endLeg()" ng-class="{disabled: uiState.submit}" href="#" Mark as end
+              a.btn.btn-success ng-click="saveLeg()" ng-class="{disabled: uiState.submit}" href="#" Save

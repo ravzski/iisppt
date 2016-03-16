@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316013207) do
+ActiveRecord::Schema.define(version: 20160316055954) do
 
   create_table "alerts", force: :cascade do |t|
     t.string   "place",         limit: 255
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20160316013207) do
     t.datetime "updated_at"
   end
 
+  create_table "directions_ratings", force: :cascade do |t|
+  end
+
   create_table "legs", force: :cascade do |t|
     t.integer "direction_id",  limit: 4
     t.string  "place",         limit: 255
@@ -46,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160316013207) do
     t.float   "lat",           limit: 24
     t.float   "lng",           limit: 24
     t.string  "instructions",  limit: 255
+    t.integer "duration",      limit: 4,                  default: 0
   end
 
   create_table "markers", force: :cascade do |t|

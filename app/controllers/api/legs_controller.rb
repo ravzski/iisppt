@@ -40,6 +40,7 @@ class Api::LegsController < ApiController
       fare
       lat
       lng
+      duration
       instructions
     ))
   end

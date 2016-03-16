@@ -1,6 +1,9 @@
 module = angular.module("AdminDirections", [])
 
-
+module.directive "directionModal", ->
+  restrict: "A"
+  replace: true
+  templateUrl: 'modules/admin_directions/modal.html'
 
 module.directive "newLegForm", ->
   restrict: "A"
