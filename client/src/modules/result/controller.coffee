@@ -170,6 +170,12 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search)->
       stepDisplay.setContent text
       stepDisplay.open map, marker
 
+  getModes = ->
+    modes = []
+    modes.push "BUS" if $scope.query.bus
+    modes.push "RAIL" if $scope.query.rail
+    modes
+
   initMap()
 
 
