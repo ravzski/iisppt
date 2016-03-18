@@ -5,11 +5,14 @@ Ctrl = ($scope,$rootScope,Gmap,$state,$http)->
     $http.get("/api/searches").
       success (data)->
         $scope.collection = data
-        for obj in data.from
+        $scope.temp = {from: [], to: []}
+        for obj,i in data.from
           map.drawCircle(obj)
+          $scope.temp.from.push(obj) if i < 10
 
-        for obj in data.to
+        for obj,i in data.to
           map.drawCircle(obj)
+          $scope.temp.to.push(obj) if i < 10
 
   initMap()
 
