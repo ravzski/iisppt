@@ -4,7 +4,7 @@ namespace :deploy do
    desc "Install bower"
    task :install_bower do
      on roles(:all) do
-       execute "cd #{release_path}/client && bower install --save"
+       execute "cd #{release_path}/client && bower install --save --force-latest"
      end
    end
 

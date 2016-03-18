@@ -14,13 +14,16 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
     rail: true
 
   $scope.form = {}
-
+  $scope.annexState = 'a'
   $scope.toggleMoreOptions = ->
     $scope.expanded = !$scope.expanded
     timeout = if !$scope.showOptions then 300 else 0
     $timeout (->
       $scope.showOptions = !$scope.showOptions
     ), timeout
+
+  $scope.changeAnnexState =(current)->
+    $scope.annexState = current
 
   $scope.search = ->
     $scope.query.from = $('#origin').val()
@@ -34,7 +37,7 @@ Ctrl = ($scope,$state,Gmap,$http,$timeout,$rootScope)->
       return
 
     if !$scope.query.bus && !$scope.query.rail
-      $scope.toggleMoreOptions() unless $scope.expanded 
+      $scope.toggleMoreOptions() unless $scope.expanded
       $.growl.error {message: MESSAGES.INVALID_TRANSIT}
       return
 

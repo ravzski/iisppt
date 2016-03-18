@@ -4,11 +4,11 @@
       li
         a href="/" Home
       li
-        a href="#" Fares & public transport
+        a href="#" ng-click="toggleHeaderPage('fare')" Fares & public transport
       li
-        a href="#" About
+        a href="#" ng-click="toggleHeaderPage('about')"  About
       li
-        a href="#" Contact
+        a href="#" ng-click="toggleHeaderPage('contact')"  Contact
 
       li.pull-right ng-if="!currentUser"
         a href="#" ng-click="toggleModal('login')" Login

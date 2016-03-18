@@ -22,6 +22,7 @@ angular.module(
     'AdminDirections',
     'Rating',
     'Profile',
-    'CustomRoute'
+    'CustomRoute',
+    'StaticPages'
   ]
 )

@@ -1,0 +1,25 @@
+.modal.open ng-if="headerPage == 'fare'"
+  form  name="form"
+    .modal-dialog.modal-xl
+      .modal-header
+        a.btn-close href="#" ng-click="toggleHeaderPage(null)"  ×
+        h4 Fares & Public Transporation
+
+      .modal-body.profile-panel
+        .row
+          .col-md-3.profile-menu-container
+            ul.profile-menu
+              li ng-class="{'active': annexState == 'a'}"
+                a href="#" ng-click="changeAnnexState('a')" Annex A
+              li ng-class="{'active': annexState == 'b'}"
+                a href="#" ng-click="changeAnnexState('b')" Annex B
+              li ng-class="{'active': annexState == 'c'}"
+                a href="#" ng-click="changeAnnexState('c')" Annex C
+              li ng-class="{'active': annexState == 'd'}"
+                a href="#" ng-click="changeAnnexState('d')" Annex D
+
+          .col-md-9.profile-body-container
+            img src="/images/a.png" ng-if="annexState == 'a'"
+            img src="/images/b.png" ng-if="annexState == 'b'"
+            img src="/images/c.png" ng-if="annexState == 'c'"
+            img src="/images/d.png" ng-if="annexState == 'd'"

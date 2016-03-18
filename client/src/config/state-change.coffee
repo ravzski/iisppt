@@ -12,6 +12,8 @@ angular.module('client').run [
         $rootScope.loginModal = false
         $rootScope.registerModal = true
 
+    $rootScope.toggleHeaderPage =(current)->
+      $rootScope.headerPage = current
 
     $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
       # this will happen if there is already a cookie
