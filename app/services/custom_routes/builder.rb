@@ -18,6 +18,7 @@ module CustomRoutes
             @lat_offset += 0.0001
             @lng_offset += 0.0001
             existing_ids.push obj.id
+
             temp[:events].push metadata_details(obj)
           end
           leg.markers.push temp
@@ -28,6 +29,18 @@ module CustomRoutes
     end
 
     private
+
+    def metadata_details obj
+      {
+        info_type: obj.info_type,
+        place: obj.place,
+        agency: obj.agency,
+        description: obj.description,
+        created_at: obj.created_at,
+        lat: obj.lat+@lat_offset,
+        lng: obj.lng+@lng_offset
+      }
+    end
 
     def details leg
       {
