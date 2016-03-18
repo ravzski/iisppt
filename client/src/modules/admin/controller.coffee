@@ -5,7 +5,7 @@ Ctrl = ($scope, $state, Session,$rootScope)->
     Session.logout().$promise.then (success) ->
       $rootScope.clearSession()
       $.growl.notice {message: MESSAGES.LOGOUT_SUCCESS}
-      $state.go("login")
+      $state.go("site.home")
 
 Ctrl.$inject = ['$scope', '$state', 'Session','$rootScope']
 angular.module('client').controller('AdminCtrl', Ctrl)

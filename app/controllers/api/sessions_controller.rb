@@ -21,7 +21,7 @@ class Api::SessionsController < ApiController
 
 
   def destroy
-    if current_user.destroy_token
+    if !!current_user && current_user.destroy_token
       render_update_success
     else
       render_obj_errors

@@ -1,7 +1,11 @@
 angular.module('client').run [
-  '$rootScope','$state','Session',($rootScope,$state,Session) ->
+  '$rootScope','$state','Session','$http',($rootScope,$state,Session,$http) ->
 
-    $rootScope.logout = () ->
+    $rootScope.siteLogout = () ->
+      authToken = localStorage.getItem('AuthToken')
+      userId = localStorage.getItem('UserId')
+      $http.defaults.headers.common.Authorization = authToken
+      $http.defaults.headers.common.UserId = userId
       Session.logout().$promise.then (success) ->
         $rootScope.clearSession()
         $.growl.notice {message: MESSAGES.LOGOUT_SUCCESS}
