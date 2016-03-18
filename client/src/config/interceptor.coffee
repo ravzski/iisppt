@@ -10,8 +10,8 @@ angular.module('client').factory('httpInterceptor', [
             $.growl.error {message: message}
           when 401
             $.growl.error {message: message}
-            $rootScope.clearSession()
-            $injector.get('$state').go("site.home")
+            # $rootScope.clearSession()
+            # $injector.get('$state').go("site.home")
           when 500,422
             $.growl.error {message: message}
 

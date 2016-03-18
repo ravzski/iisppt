@@ -7,7 +7,7 @@ class Api::RouteRatingsController < ApiController
   end
 
   def create
-    if @obj.update_attribute(:rating, params[:rating])
+    if @obj.update_attributes(rating: params[:rating], comment: params[:comment])
       render_empty_success
     else
       render_obj_errors

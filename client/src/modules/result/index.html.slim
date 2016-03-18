@@ -39,3 +39,21 @@
 #map ng-show="!uiState.noRoute"
 .no-route-container ng-show="uiState.noRoute"
   h5 No Routes Available
+
+
+.modal.open ng-if="openRate"
+  form  name="form"
+    .modal-dialog
+      .modal-header
+        a.btn-close href="#" ng-click="toggleRating()"  ×
+        h4 Rate
+
+      .modal-body
+        .from-group
+          label Comment
+          input.form-control
+
+      .modal-footer
+        .row
+          .col-md-12
+            a.btn.btn-success ng-click="toggleRating()"  href="#" Save

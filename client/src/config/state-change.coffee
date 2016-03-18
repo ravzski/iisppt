@@ -4,6 +4,11 @@ angular.module('client').run [
     # authenticator flag serves as
     # a flagger if on state change, the token is still valid
     $rootScope.authenticatorFlag = true
+    $rootScope.openRate = false
+
+    $rootScope.toggleRating = ->
+      $rootScope.openRate  = !$rootScope.openRate
+
     $rootScope.toggleModal =(state)->
       if state == 'login'
         $rootScope.loginModal = true

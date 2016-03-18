@@ -18,7 +18,7 @@ module.directive "routeRating", ->
     avg: "="
     count: "="
     fare: "="
-    
+
   link: ($scope, element, attrs) ->
     $scope.max_rating = 5
     if $scope.avg == 0
@@ -55,7 +55,9 @@ module.directive "routeRatingAction",
   link: ($scope, element, attrs) ->
     $scope.max_rating = 5
 
+
     $scope.rate =(rating)->
+      $rootScope.openRate = true
       if !!$rootScope.currentUser
         $scope.rating = rating
         Rating.save(from: $scope.from, to: $scope.to, route_index: $scope.index, rating: rating).$promise
