@@ -9,7 +9,7 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search,Directio
     showRating: false
     showDirection: false
     customRoute: false
-
+  $scope.annexState = 'a'
   $scope.routes = null
   $scope.query =
     from: $state.params.from
@@ -151,6 +151,10 @@ Ctrl = ($scope,$state,Gmap,$http,$rootScope,$timeout,$sce,Rating,Search,Directio
       return false
     true
 
+
+  $scope.changeAnnexState =(current)->
+    $scope.annexState = current
+    
   $scope.currentTimeLabel =(duration)->
     end = moment(this.query.time, ["h:mm A"]).add(duration, 'minutes')
     "#{this.query.time}–#{end.format('hh:mm A')}"

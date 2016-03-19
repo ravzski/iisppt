@@ -81,5 +81,6 @@ angular.module('client').run [
     # so that it will go authentication on every state change (if state is authenticable)
     $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
       $rootScope.authenticatorFlag = true
+      $rootScope.headerPage = null
 
 ]
